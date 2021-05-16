@@ -1,1 +1,1 @@
-# HRMSProject
+# Human Resources Managment System Project
