@@ -6,6 +6,7 @@ import com.demo.hrms.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +28,14 @@ public class UserManager implements UserService {
     @Override
     public List<User> getByIds(List<Integer> id) {
         return userDao.findAllById(id);
-        userDao.
+
     }
+
+    /*@Override
+    public Optional<User> search(String email) {
+       // return userDao.search(email);
+
+    }*/
 
     @Override
     public List<User> getAll() {

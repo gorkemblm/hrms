@@ -9,5 +9,5 @@ public interface UserService {
     List<User> getAll();
     Optional<User> getById(int id);
     List<User> getByIds(List<Integer> id);
-
+    //Optional<User> search(String email);
 }
