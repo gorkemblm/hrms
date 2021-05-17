@@ -22,4 +22,5 @@ public class CorporateUser extends User {
     private String website;
     @Column(name = "approve_status", nullable = false)
     private boolean approveStatus;
+
 }
