@@ -1,12 +1,15 @@
 package com.demo.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="individual_users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class IndividualUser extends User{
@@ -17,15 +20,5 @@ public class IndividualUser extends User{
     private String identityNumber;
     private LocalDate dateOfBirth;
 
-    public IndividualUser(){
 
-    }
-
-    public IndividualUser(char gender, String firstName, String lastName, String identityNumber, LocalDate dateOfBirth) {
-        this.gender = gender;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.identityNumber = identityNumber;
-        this.dateOfBirth = dateOfBirth;
-    }
 }

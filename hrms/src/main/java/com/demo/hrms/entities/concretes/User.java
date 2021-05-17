@@ -1,11 +1,16 @@
 package com.demo.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
@@ -19,17 +24,5 @@ public abstract class User {
     private LocalDate updatedAtDate;
     private boolean isActive;
 
-    public User(){
 
-    }
-
-    public User(int id, String email, String passwordHash,String passwordSalt, LocalDate createdAtDate, LocalDate updatedAtDate, boolean isActive) {
-        this.id = id;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.passwordSalt = passwordSalt;
-        this.createdAtDate = createdAtDate;
-        this.updatedAtDate = updatedAtDate;
-        this.isActive = isActive;
-    }
 }
