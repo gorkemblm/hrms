@@ -1,6 +1,9 @@
 package com.gorkem.hrms.entities.concretes;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,7 +13,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(of = {"id"})
 @Table(name = "occupations")
 public class Occupation {
     @Id
@@ -27,4 +29,6 @@ public class Occupation {
     private LocalDate updatedAt;
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+
 }

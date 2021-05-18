@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CorporateUserRegisterDto extends UserRegisterDto {
+public class CorporateUserRegisterDto {
 
+    private String email;
+    private String password;
     private String companyName;
     private String webSite;
 

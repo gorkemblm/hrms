@@ -9,11 +9,14 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IndividualUserRegisterDto extends UserRegisterDto {
+public class IndividualUserRegisterDto {
 
+    private String email;
+    private String password;
     private String firstName;
     private String lastName;
     private String identityNumber;
-    private char gender;
     private LocalDate dateOfBirth;
+    private char gender;
+
 }

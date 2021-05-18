@@ -1,17 +1,18 @@
 package com.gorkem.hrms.entities.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "corporate_users")
 @PrimaryKeyJoinColumn(name = "corporate_user_id")
 public class CorporateUser extends User {

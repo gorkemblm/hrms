@@ -1,9 +1,6 @@
 package com.gorkem.hrms.entities.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "individual_users")
 @PrimaryKeyJoinColumn(name = "individual_user_id")
 public class IndividualUser extends User {
@@ -34,4 +32,5 @@ public class IndividualUser extends User {
 
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
+
 }

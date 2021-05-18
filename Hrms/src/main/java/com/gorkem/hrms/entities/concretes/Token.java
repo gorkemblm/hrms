@@ -5,12 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tokens")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode(of = {"id"})
+@Table(name = "tokens")
 public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,4 +20,6 @@ public class Token {
 
     @OneToOne(mappedBy = "token")
     private User user;
+
+
 }

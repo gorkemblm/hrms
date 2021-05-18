@@ -7,11 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "central_unit_users")
 @PrimaryKeyJoinColumn(name = "central_unit_user_id")
 public class CentralUnitUser extends User {
