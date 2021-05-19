@@ -29,7 +29,6 @@ public class User {
     @Column(name = "is_active", nullable = true)
     private boolean isActive;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "user_tokens",
             joinColumns =

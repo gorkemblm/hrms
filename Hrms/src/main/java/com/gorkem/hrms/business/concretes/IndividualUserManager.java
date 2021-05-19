@@ -1,7 +1,8 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.IndividualUserService;
-import com.gorkem.hrms.core.adapters.MernisServiceAdapter;
+import com.gorkem.hrms.core.adapters.abstracts.MicroService;
+import com.gorkem.hrms.core.adapters.concretes.MernisServiceAdapter;
 import com.gorkem.hrms.core.utils.security.PasswordHash;
 import com.gorkem.hrms.dataAccess.abstracts.IndividualUserDao;
 import com.gorkem.hrms.entities.concretes.IndividualUser;
@@ -16,10 +17,12 @@ import java.util.List;
 public class IndividualUserManager implements IndividualUserService {
 
     private IndividualUserDao individualUserDao;
+    private MicroService microService;
 
     @Autowired
-    public IndividualUserManager(IndividualUserDao individualUserDao) {
+    public IndividualUserManager(IndividualUserDao individualUserDao, MicroService microService) {
         this.individualUserDao = individualUserDao;
+        this.microService = microService;
     }
 
     @Override
@@ -32,9 +35,7 @@ public class IndividualUserManager implements IndividualUserService {
 
         String passwordHash = PasswordHash.generateHash(individualUserRegisterDto.getPassword());
 
-        boolean result = MernisServiceAdapter.mernisServiceValidation(individualUserRegisterDto);
-
-        if (result) {
+        if (microService.validation(individualUserRegisterDto)) {
 
             IndividualUser individualUser = new IndividualUser();
 
@@ -55,5 +56,10 @@ public class IndividualUserManager implements IndividualUserService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public IndividualUser findByEmailAddress(String email) {
+        return this.individualUserDao.findByEmailAddress(email);
     }
 }

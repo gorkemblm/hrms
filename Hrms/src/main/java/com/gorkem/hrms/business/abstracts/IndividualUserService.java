@@ -10,5 +10,6 @@ public interface IndividualUserService {
     List<IndividualUser> getAll();
 
     IndividualUser save(IndividualUserRegisterDto individualUserRegisterDto) throws Exception;
+    IndividualUser findByEmailAddress(String email);
 
 }
