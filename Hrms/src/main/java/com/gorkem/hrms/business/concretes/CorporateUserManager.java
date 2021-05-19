@@ -43,8 +43,8 @@ public class CorporateUserManager implements CorporateUserService {
             corporateUser.setUpdatedAt(LocalDate.now());
             corporateUser.setApproveStatus(false);
 
-            CorporateUser finalUser = this.corporateUserDao.save(corporateUser);
-            return finalUser;
+            return this.corporateUserDao.save(corporateUser);
+
         } else {
             return null;
 

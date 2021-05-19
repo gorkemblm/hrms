@@ -5,9 +5,7 @@ import com.gorkem.hrms.entities.concretes.IndividualUser;
 import com.gorkem.hrms.entities.concretes.dtos.IndividualUserRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.function.Predicate;
 
 @RestController
 @RequestMapping("/api/individualusers")

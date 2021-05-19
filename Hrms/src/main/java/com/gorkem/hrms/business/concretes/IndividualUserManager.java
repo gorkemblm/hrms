@@ -2,12 +2,12 @@ package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.IndividualUserService;
 import com.gorkem.hrms.core.adapters.abstracts.MicroService;
-import com.gorkem.hrms.core.adapters.concretes.MernisServiceAdapter;
 import com.gorkem.hrms.core.utils.security.PasswordHash;
 import com.gorkem.hrms.dataAccess.abstracts.IndividualUserDao;
 import com.gorkem.hrms.entities.concretes.IndividualUser;
 import com.gorkem.hrms.entities.concretes.dtos.IndividualUserRegisterDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +20,9 @@ public class IndividualUserManager implements IndividualUserService {
     private MicroService microService;
 
     @Autowired
-    public IndividualUserManager(IndividualUserDao individualUserDao, MicroService microService) {
+    public IndividualUserManager(
+            @Qualifier("main") IndividualUserDao individualUserDao, @Qualifier("microservice") MicroService microService) {
+
         this.individualUserDao = individualUserDao;
         this.microService = microService;
     }
@@ -33,9 +35,8 @@ public class IndividualUserManager implements IndividualUserService {
     @Override
     public IndividualUser save(IndividualUserRegisterDto individualUserRegisterDto) throws Exception {
 
-        String passwordHash = PasswordHash.generateHash(individualUserRegisterDto.getPassword());
-
         if (microService.validation(individualUserRegisterDto)) {
+            String passwordHash = PasswordHash.generateHash(individualUserRegisterDto.getPassword());
 
             IndividualUser individualUser = new IndividualUser();
 
@@ -50,8 +51,7 @@ public class IndividualUserManager implements IndividualUserService {
             individualUser.setUpdatedAt(LocalDate.now());
             individualUser.setActive(true);
 
-            IndividualUser finalIndividualUser = this.individualUserDao.save(individualUser);
-            return finalIndividualUser;
+            return this.individualUserDao.save(individualUser);
 
         } else {
             return null;
