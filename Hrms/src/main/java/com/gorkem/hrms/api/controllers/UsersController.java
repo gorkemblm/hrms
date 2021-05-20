@@ -23,4 +23,12 @@ public class UsersController {
     public List<User> getAll() {
         return this.userService.getAll();
     }
+
+    @GetMapping("/{email}")
+    @ResponseBody
+    public User findByEmail(@PathVariable("email") String email){
+        return this.userService.findByEmailAddress(email);
+    }
+
+
 }

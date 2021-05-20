@@ -30,9 +30,5 @@ public class IndividualUsersController {
         return this.individualUserService.save(individualUserRegisterDto);
     }
 
-    @GetMapping("/find/{email}")
-    @ResponseBody
-    public IndividualUser findByEmail(@PathVariable("email") String email){
-        return this.individualUserService.findByEmailAddress(email);
-    }
+
 }

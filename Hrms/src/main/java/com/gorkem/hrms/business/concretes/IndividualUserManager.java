@@ -58,8 +58,5 @@ public class IndividualUserManager implements IndividualUserService {
         }
     }
 
-    @Override
-    public IndividualUser findByEmailAddress(String email) {
-        return this.individualUserDao.findByEmailAddress(email);
-    }
+
 }

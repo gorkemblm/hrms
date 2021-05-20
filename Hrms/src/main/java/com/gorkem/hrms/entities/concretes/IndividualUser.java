@@ -28,9 +28,11 @@ public class IndividualUser extends User {
     private String identityNumber;
 
     @Column(name = "gender", nullable = false)
-    private char gender;
+    private int gender;
 
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
+
+
 
 }
