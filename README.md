@@ -1,4 +1,4 @@
-# Human Resources Management System Project
+# Human Resources Management System
 
 ### The following Dependencies were used
 - Spring Boot DevTools
