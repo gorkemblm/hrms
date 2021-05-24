@@ -1,7 +1,7 @@
 package com.gorkem.hrms.core.adapters.concretes;
 
 import MernisService.EKOKPSPublicSoap;
-import com.gorkem.hrms.core.adapters.abstracts.MicroService;
+import com.gorkem.hrms.core.adapters.abstracts.CheckService;
 import com.gorkem.hrms.entities.concretes.dtos.IndividualUserRegisterDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.Locale;
 
 @Service
 @Qualifier("microservice")
-public class MernisServiceAdapter implements MicroService {
+public class MernisServiceAdapter implements CheckService {
 
     private final static EKOKPSPublicSoap ekokpsPublicSoap = new EKOKPSPublicSoap();
 

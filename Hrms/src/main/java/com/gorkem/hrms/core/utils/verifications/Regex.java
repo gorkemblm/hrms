@@ -1,4 +1,4 @@
-package com.gorkem.hrms.core.utils;
+package com.gorkem.hrms.core.utils.verifications;
 
 import java.util.regex.Pattern;
 
@@ -20,5 +20,6 @@ public class Regex {
         } else {
             return false;
         }
+
     }
 }

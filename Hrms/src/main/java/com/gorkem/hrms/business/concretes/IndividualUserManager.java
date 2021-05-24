@@ -1,7 +1,7 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.IndividualUserService;
-import com.gorkem.hrms.core.adapters.abstracts.MicroService;
+import com.gorkem.hrms.core.adapters.abstracts.CheckService;
 import com.gorkem.hrms.core.utils.security.PasswordHash;
 import com.gorkem.hrms.dataAccess.abstracts.IndividualUserDao;
 import com.gorkem.hrms.entities.concretes.IndividualUser;
@@ -17,14 +17,14 @@ import java.util.List;
 public class IndividualUserManager implements IndividualUserService {
 
     private IndividualUserDao individualUserDao;
-    private MicroService microService;
+    private CheckService checkService;
 
     @Autowired
     public IndividualUserManager(
-            @Qualifier("main") IndividualUserDao individualUserDao, @Qualifier("microservice") MicroService microService) {
+            @Qualifier("main") IndividualUserDao individualUserDao, @Qualifier("microservice") CheckService checkService) {
 
         this.individualUserDao = individualUserDao;
-        this.microService = microService;
+        this.checkService = checkService;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class IndividualUserManager implements IndividualUserService {
     @Override
     public IndividualUser save(IndividualUserRegisterDto individualUserRegisterDto) throws Exception {
 
-        if (microService.validation(individualUserRegisterDto)) {
+        if (checkService.validation(individualUserRegisterDto)) {
             String passwordHash = PasswordHash.generateHash(individualUserRegisterDto.getPassword());
 
             IndividualUser individualUser = new IndividualUser();

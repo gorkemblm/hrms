@@ -21,13 +21,14 @@ public class PasswordHash {
         }
         return new String(hexChars);
     }
+        public static byte[] createSalt() {
+            byte[] bytes = new byte[20];
+            SecureRandom secureRandom = new SecureRandom();
+            secureRandom.nextBytes(bytes);
+            return bytes;
+        }
 
-    public static byte[] createSalt() {
-        byte[] bytes = new byte[20];
-        SecureRandom secureRandom = new SecureRandom();
-        secureRandom.nextBytes(bytes);
-        return bytes;
-    }
+
 
     public static String generateHash(String password) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance(hashAlghoritm);

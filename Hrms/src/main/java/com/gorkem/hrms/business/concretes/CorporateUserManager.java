@@ -1,7 +1,7 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.CorporateUserService;
-import com.gorkem.hrms.core.utils.Regex;
+import com.gorkem.hrms.core.utils.verifications.Regex;
 import com.gorkem.hrms.core.utils.security.PasswordHash;
 import com.gorkem.hrms.dataAccess.abstracts.CorporateUserDao;
 import com.gorkem.hrms.entities.concretes.CorporateUser;
