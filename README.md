@@ -7,4 +7,4 @@
 - Spring Data JPA
 - PostgreSQL Driver
 
-<a href="">ER Diagram Link</a>
+<a href="https://drawsql.app/kodlamaio/diagrams/hrms-1" target = "_blank">ER Diagram Link</a>
