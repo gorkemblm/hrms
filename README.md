@@ -7,4 +7,4 @@
 - Spring Data JPA
 - PostgreSQL Driver
 
-<a href="<a href="https://www.linkedin.com/in/duthris/">ER Diagram Link</a>
+<a href="https://www.linkedin.com/in/duthris/">ER Diagram Link</a>
