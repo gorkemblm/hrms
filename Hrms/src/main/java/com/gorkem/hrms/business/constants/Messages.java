@@ -20,4 +20,7 @@ public class Messages {
     //Employer
     public static String wrongMailFormat = "The e-mail format you entered is incorrect, please check it.";
 
+    public static String updateJobAdvertisementSuccess = "The status of your job posting has been successfully updated.";
+
+    public static String updateJobAdvertisementFail = "Could not update the status of your job posting.";
 }
