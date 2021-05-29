@@ -1,14 +1,18 @@
 package com.gorkem.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "job_advertisement")
 public class JobAdvertisement {
 
@@ -27,10 +31,10 @@ public class JobAdvertisement {
     @Column(name = "job_description", length = 1024, nullable = false)
     private String jobDescription;
 
+    @JsonIgnore
     @Column(name = "created_at")
     private LocalDate createdAt;
 
-    @JsonIgnore
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
@@ -40,26 +44,25 @@ public class JobAdvertisement {
     @Column(name = "number_of_open_position", nullable = false)
     private int numberOfOpenPosition;
 
-    @JsonIgnore
     @Column(name = "number_of_application")
     private int numberOfApplication;
 
+    @JsonIncludeProperties({"companyName"})
     @ManyToOne
-    @JoinColumn(name = "employer_id")//employer'ın id sinden join olucak
+    @JoinColumn(name = "employer_id")
     private Employer employer;
 
+    @JsonIncludeProperties({"name"})
     @ManyToOne
     @JoinColumn(name = "occupation_id")
     private Occupation occupation;
 
+    @JsonIncludeProperties({"city"})
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-
 }
 
-
-//Şehir
 
 
 
