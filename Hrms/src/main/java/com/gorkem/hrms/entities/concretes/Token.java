@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name = "tokens")
 public class Token {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,7 +25,6 @@ public class Token {
 
     @Column(name = "value", length = 2048, unique = true, nullable = false)
     private String value;
-
 
     @Column(name = "created_at")
     private LocalDate createdDate;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class DefaultEmailManager implements EmailService {
     @Override
     public boolean isTheLinkClicked() {
-        return true;//I accepted default true.
+        return true;
     }
 
     @Override

@@ -11,5 +11,4 @@ public interface OccupationService {
     DataResult<List<Occupation>> getAll();
 
     Result add(Occupation occupation);
-
 }

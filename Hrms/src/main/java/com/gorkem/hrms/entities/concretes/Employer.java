@@ -22,5 +22,4 @@ public class Employer extends CorporateUser {
 
     @OneToMany(mappedBy = "employer")
     private List<JobAdvertisement> jobAdvertisements;
-
 }

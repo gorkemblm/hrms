@@ -26,5 +26,4 @@ public abstract class IndividualUser extends User {
 
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
-
 }
