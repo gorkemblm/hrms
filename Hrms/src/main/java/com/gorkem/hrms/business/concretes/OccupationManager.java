@@ -33,6 +33,5 @@ public class OccupationManager implements OccupationService {
             this.occupationDao.save(occupation);
             return new SuccessResult(Messages.successfullyAdded);
         }
-
     }
 }

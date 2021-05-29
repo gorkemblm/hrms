@@ -69,5 +69,4 @@ public class JobSeekerManager implements JobSeekerService {
         }
         return false;
     }
-
 }

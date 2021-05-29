@@ -39,5 +39,4 @@ public abstract class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "token_id", referencedColumnName = "id")
     private Token token;
-
 }
