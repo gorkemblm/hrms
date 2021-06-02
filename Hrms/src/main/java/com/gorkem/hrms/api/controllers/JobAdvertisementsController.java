@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobAdvertisement")
+@RequestMapping("/api/jobAdvertisements")
 public class JobAdvertisementsController {
 
     private JobAdvertisementService jobAdvertisementService;

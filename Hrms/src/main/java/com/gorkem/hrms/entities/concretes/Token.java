@@ -1,10 +1,9 @@
 package com.gorkem.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gorkem.hrms.entities.abstracts.User;
+import com.gorkem.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@EqualsAndHashCode(of = {"id"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tokens")
@@ -27,7 +25,7 @@ public class Token {
     private String value;
 
     @Column(name = "created_at")
-    private LocalDate createdDate;
+    private LocalDate createdDate = LocalDate.now();
 
     @JsonIgnore
     @Column(name = "updated_at")

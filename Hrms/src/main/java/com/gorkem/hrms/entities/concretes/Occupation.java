@@ -1,5 +1,6 @@
 package com.gorkem.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Occupation {
     @Column(name = "description", length = 512)
     private String description;
 
+    @JsonIgnore
     @Column(name = "is_active")
     private boolean isActive;
 

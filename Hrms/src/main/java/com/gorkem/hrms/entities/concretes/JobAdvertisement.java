@@ -1,7 +1,6 @@
 package com.gorkem.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,7 +32,7 @@ public class JobAdvertisement {
 
     @JsonIgnore
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     @Column(name = "updated_at")
     private LocalDate updatedAt;
@@ -47,17 +46,14 @@ public class JobAdvertisement {
     @Column(name = "number_of_application")
     private int numberOfApplication;
 
-    @JsonIncludeProperties({"companyName"})
     @ManyToOne
     @JoinColumn(name = "employer_id")
     private Employer employer;
 
-    @JsonIncludeProperties({"name"})
     @ManyToOne
     @JoinColumn(name = "occupation_id")
     private Occupation occupation;
 
-    @JsonIncludeProperties({"city"})
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
