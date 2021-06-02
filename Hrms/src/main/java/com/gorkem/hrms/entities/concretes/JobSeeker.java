@@ -21,4 +21,5 @@ public class JobSeeker extends IndividualUser {
     @JsonIgnore
     @Column(name = "number_of_application")
     private int numberOfApplication;
+
 }

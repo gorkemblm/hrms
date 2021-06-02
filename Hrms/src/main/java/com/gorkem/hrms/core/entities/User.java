@@ -1,10 +1,14 @@
-package com.gorkem.hrms.entities.abstracts;
+package com.gorkem.hrms.core.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gorkem.hrms.entities.concretes.Image;
 import com.gorkem.hrms.entities.concretes.Token;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +24,9 @@ public abstract class User {
     @Column(name = "id")
     private int id;
 
+    @Email(message = "Wrong email format.")
+    @NotNull
+    @NotBlank
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -27,7 +34,7 @@ public abstract class User {
     private String passwordHash;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     @JsonIgnore
     @Column(name = "updated_at")
@@ -39,4 +46,8 @@ public abstract class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "token_id", referencedColumnName = "id")
     private Token token;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Image image;
 }
