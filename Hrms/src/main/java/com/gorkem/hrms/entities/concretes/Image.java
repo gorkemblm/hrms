@@ -18,18 +18,17 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "id")
+    private int id;
 
     @JsonIgnore
     @Column(name = "added_at")
     private LocalDate addedAt = LocalDate.now();
 
-    @Column(name = "image_path", length = 1024)
-    private String imagePath;
+    @Column(name = "url",length = 256)
+    private String url;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id",unique = true)
     private User user;
 }

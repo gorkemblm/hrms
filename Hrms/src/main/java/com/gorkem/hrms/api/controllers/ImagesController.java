@@ -4,10 +4,8 @@ import com.gorkem.hrms.business.abstracts.ImageService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.dtos.ImageWithUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/images")
@@ -20,8 +18,9 @@ public class ImagesController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/addForUser")
-    public Result addForUser(@RequestBody ImageWithUserDto imageWithUserDto) {
-        return this.imageService.addForUser(imageWithUserDto);
+    @PostMapping("/add")
+    public Result add(@ModelAttribute ImageWithUserDto imageWithUserDto, MultipartFile file) {
+
+        return this.imageService.add(imageWithUserDto, file);
     }
 }

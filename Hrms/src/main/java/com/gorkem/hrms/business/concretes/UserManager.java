@@ -33,4 +33,9 @@ public class UserManager implements UserService {
         this.userDao.save(user);
         return new SuccessResult(Messages.successfullyAdded);
     }
+
+    @Override
+    public User findById(int id) {
+        return this.userDao.findById((id));
+    }
 }
