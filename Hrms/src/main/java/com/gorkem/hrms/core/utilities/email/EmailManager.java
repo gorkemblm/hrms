@@ -1,10 +1,9 @@
-package com.gorkem.hrms.core.utilities.email.concretes;
+package com.gorkem.hrms.core.utilities.email;
 
-import com.gorkem.hrms.core.utilities.email.abstracts.EmailService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefaultEmailManager implements EmailService {
+public class EmailManager implements EmailService {
     @Override
     public boolean isTheLinkClicked() {
         return true;

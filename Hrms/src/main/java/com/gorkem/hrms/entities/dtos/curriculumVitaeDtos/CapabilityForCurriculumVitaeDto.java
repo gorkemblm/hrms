@@ -1,4 +1,4 @@
-package com.gorkem.hrms.entities.dtos;
+package com.gorkem.hrms.entities.dtos.curriculumVitaeDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class CapabilityForCurriculumVitaeDto {
 
     private int curriculumVitaeId;
+
     private String capabilityType;
+
     private String capabilityName;
 }

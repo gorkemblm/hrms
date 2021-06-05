@@ -1,8 +1,8 @@
-package com.gorkem.hrms.core.adapters.abstracts;
+package com.gorkem.hrms.core.adapters.mernis;
 
 import com.gorkem.hrms.entities.abstracts.IndividualUser;
 
-public interface VerificationService {
+public interface AuthenticationService {
 
     boolean isRealPerson(IndividualUser individualUser);
 }
