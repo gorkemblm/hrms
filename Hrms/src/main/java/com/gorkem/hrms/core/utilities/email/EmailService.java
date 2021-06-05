@@ -1,4 +1,4 @@
-package com.gorkem.hrms.core.utilities.email.abstracts;
+package com.gorkem.hrms.core.utilities.email;
 
 public interface EmailService {
 
