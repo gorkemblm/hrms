@@ -2,7 +2,7 @@ package com.gorkem.hrms.business.abstracts;
 
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.Capability;
-import com.gorkem.hrms.entities.dtos.CapabilityForCurriculumVitaeDto;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CapabilityForCurriculumVitaeDto;
 
 public interface CapabilityService {
 

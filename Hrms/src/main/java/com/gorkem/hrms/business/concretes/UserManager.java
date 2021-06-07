@@ -38,4 +38,12 @@ public class UserManager implements UserService {
     public User findById(int id) {
         return this.userDao.findById((id));
     }
+
+    @Override
+    public boolean findByEmailAndPasswordHash(String email, String password) {
+        if (this.userDao.findByEmailAndPasswordHash(email, password) != null) {
+            return false;
+        }
+        return true;
+    }
 }

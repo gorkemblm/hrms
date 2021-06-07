@@ -10,4 +10,8 @@ public interface UserService {
     DataResult<List<User>> getAll();
 
     Result add(User user);
+
+    User findById(int id);
+
+    boolean findByEmailAndPasswordHash(String email, String password);
 }

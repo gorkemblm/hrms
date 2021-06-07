@@ -3,7 +3,7 @@ package com.gorkem.hrms.business.abstracts;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.School;
-import com.gorkem.hrms.entities.dtos.SchoolForCurriculumVitaeDto;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.SchoolForCurriculumVitaeDto;
 
 import java.util.List;
 

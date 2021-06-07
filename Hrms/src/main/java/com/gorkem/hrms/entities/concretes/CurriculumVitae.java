@@ -30,7 +30,7 @@ public class CurriculumVitae {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @Column(name = "cover_letter", length = 1024)
+    @Column(name = "cover_letter", length = 1200)
     private String coverLetter;
 
     @OneToOne

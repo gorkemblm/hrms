@@ -4,10 +4,11 @@ import com.gorkem.hrms.business.abstracts.CurriculumVitaeService;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.CurriculumVitae;
-import com.gorkem.hrms.entities.dtos.*;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CoverLetterForCurriculumVitaeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class CurriculumVitaesController {
     }
 
     @PostMapping("/addCoverLetterForJobSeeker")
-    public Result addCoverLetterForJobSeeker(@RequestBody CoverLetterForCurriculumVitaeDto coverLetterForCurriculumVitaeDto) {
+    public Result addCoverLetterForJobSeeker(@Valid @RequestBody CoverLetterForCurriculumVitaeDto coverLetterForCurriculumVitaeDto) {
         return this.curriculumVitaeService.addCoverLetterForJobSeeker(coverLetterForCurriculumVitaeDto);
     }
 }

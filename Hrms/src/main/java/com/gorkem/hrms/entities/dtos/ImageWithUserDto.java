@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ImageWithUserDto {
 
     private int userId;
-    private String imagePath;
+    private String url = "https://api.cloudinary.com/v1_1/gorkemblm/image/upload";//??
 }

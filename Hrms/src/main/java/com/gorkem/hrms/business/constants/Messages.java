@@ -4,6 +4,10 @@ public class Messages {
 
     public static String successfullyAdded = "Successfully added.";
 
+    public static String FailedToAdd  = "Adding failed.";
+
+    public static String FailedToList  = "Listing failed.";
+
     public static String successfullyListed = "Successfully listed.";
 
     public static String existInRecords = "This record already exists.";
