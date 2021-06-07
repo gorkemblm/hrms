@@ -3,9 +3,12 @@ package com.gorkem.hrms.business.concretes;
 import com.gorkem.hrms.business.abstracts.AuthService;
 import com.gorkem.hrms.business.abstracts.EmployerService;
 import com.gorkem.hrms.business.abstracts.JobSeekerService;
+import com.gorkem.hrms.business.abstracts.UserService;
 import com.gorkem.hrms.business.constants.Messages;
+import com.gorkem.hrms.core.utilities.results.ErrorResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
+import com.gorkem.hrms.entities.concretes.CurriculumVitae;
 import com.gorkem.hrms.entities.concretes.Employer;
 import com.gorkem.hrms.entities.concretes.JobSeeker;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
@@ -19,16 +22,24 @@ public class AuthManager implements AuthService {
 
     private JobSeekerService jobSeekerService;
     private EmployerService employerService;
+    private UserService userService;
 
     @Autowired
-    public AuthManager(JobSeekerService jobSeekerService, EmployerService employerService) {
+    public AuthManager(JobSeekerService jobSeekerService, EmployerService employerService, UserService userService) {
         this.jobSeekerService = jobSeekerService;
         this.employerService = employerService;
+        this.userService = userService;
     }
 
     @Override
     public Result loginForUser(UserForLoginDto userForLoginDto) {
-        return null;
+        boolean result = this.userService.findByEmailAndPasswordHash(userForLoginDto.getEmail(), userForLoginDto.getPassword());
+
+        if (!result) {
+            return new ErrorResult();
+        }else {
+            return new SuccessResult();
+        }
     }
 
     @Override
