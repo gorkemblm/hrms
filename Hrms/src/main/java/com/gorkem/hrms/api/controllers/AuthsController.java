@@ -1,6 +1,8 @@
 package com.gorkem.hrms.api.controllers;
 
 import com.gorkem.hrms.business.abstracts.AuthService;
+import com.gorkem.hrms.business.constants.Messages;
+import com.gorkem.hrms.core.utilities.results.ErrorResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.JobSeekerForRegisterDto;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auths")
@@ -23,17 +27,33 @@ public class AuthsController {
     }
 
     @PostMapping("/registerForJobSeeker")
-    Result registerForJobSeeker(@RequestBody JobSeekerForRegisterDto jobSeekerForRegisterDto) {
-        return this.authService.registerForJobSeeker(jobSeekerForRegisterDto);
+    Result registerForJobSeeker(@Valid @RequestBody JobSeekerForRegisterDto jobSeekerForRegisterDto) {
+
+        var result = this.authService.registerForJobSeeker(jobSeekerForRegisterDto);
+
+        if (!result.isSuccess()) {
+            return new ErrorResult(Messages.FailedToAdd);//BURADA KALDIK!
+        }
+        return result;
     }
 
     @PostMapping("/registerForEmployer")
-    public Result registerForEmployer(@RequestBody EmployerForRegisterDto employerForRegisterDto) {
-        return this.authService.registerForEmployer(employerForRegisterDto);
+    public Result registerForEmployer(@Valid @RequestBody EmployerForRegisterDto employerForRegisterDto) {
+        var result = this.authService.registerForEmployer(employerForRegisterDto);
+
+        if (!result.isSuccess()) {
+            return new ErrorResult(Messages.FailedToAdd);
+        }
+        return result;
     }
 
     @PostMapping("/loginForUser")
-    Result loginForUser(@RequestBody UserForLoginDto userForLoginDto) {
-        return this.authService.loginForUser(userForLoginDto);
+    Result loginForUser(@Valid @RequestBody UserForLoginDto userForLoginDto) {
+        var result = this.authService.loginForUser(userForLoginDto);
+
+        if (!result.isSuccess()) {
+            return new ErrorResult();
+        }
+        return result;
     }
 }
