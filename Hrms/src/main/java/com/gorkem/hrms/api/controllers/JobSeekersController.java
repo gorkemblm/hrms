@@ -25,7 +25,7 @@ public class JobSeekersController {
         return this.jobSeekerService.getAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add")//Useless
     public Result add(@RequestBody JobSeeker jobSeeker) {
         return this.jobSeekerService.add(jobSeeker);
     }
