@@ -1,8 +1,8 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.JobSeekerService;
-import com.gorkem.hrms.core.adapters.abstracts.VerificationService;
-import com.gorkem.hrms.core.utilities.email.abstracts.EmailService;
+import com.gorkem.hrms.business.abstracts.UserCheckService;
+import com.gorkem.hrms.core.utilities.email.EmailService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.dataAccess.abstracts.JobSeekerDao;
@@ -16,33 +16,24 @@ import java.util.List;
 public class JobSeekerManager implements JobSeekerService {
 
     private JobSeekerDao jobSeekerDao;
-    private VerificationService verificationService;
+    private UserCheckService userCheckService;
     private EmailService emailService;
 
     @Autowired
-    public JobSeekerManager(JobSeekerDao jobSeekerDao, VerificationService verificationService, EmailService emailService) {
+    public JobSeekerManager(JobSeekerDao jobSeekerDao, UserCheckService userCheckService, EmailService emailService) {
         this.jobSeekerDao = jobSeekerDao;
-        this.verificationService = verificationService;
+        this.userCheckService = userCheckService;
         this.emailService = emailService;
     }
 
     @Override
     public DataResult<List<JobSeeker>> getAll() {
-        return new SuccessDataResult<List<JobSeeker>>(Messages.successfullyAdded, this.jobSeekerDao.findAll());
+        return new SuccessDataResult<List<JobSeeker>>(Messages.successfullyListed, this.jobSeekerDao.findAll());
     }
 
     @Override
     public Result add(JobSeeker jobSeeker) {
-        if (!isFieldsEmpty(
-                jobSeeker.getEmail(),
-                jobSeeker.getIdentityNumber(),
-                jobSeeker.getFirstName(),
-                jobSeeker.getLastName(),
-                jobSeeker.getPasswordHash(),
-                String.valueOf(jobSeeker.getDateOfBirth().getYear())))
-            return new ErrorResult(Messages.requiredFields);
-
-        else if (!verificationService.isRealPerson(jobSeeker)) {
+        if (!userCheckService.checkIfRealPerson(jobSeeker)) {
 
             return new ErrorResult(Messages.notExistGovernment);
 
@@ -61,12 +52,8 @@ public class JobSeekerManager implements JobSeekerService {
         }
     }
 
-    public boolean isFieldsEmpty(String... args) {
-        for (String s : args) {
-            if (s.isEmpty() || s == null) {
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public JobSeeker findById(int id) {
+        return this.jobSeekerDao.findById(id);
     }
 }

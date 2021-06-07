@@ -1,7 +1,7 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.EmployerService;
-import com.gorkem.hrms.core.utilities.email.abstracts.EmailService;
+import com.gorkem.hrms.core.utilities.email.EmailService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.dataAccess.abstracts.EmployerDao;
@@ -32,16 +32,7 @@ public class EmployerManager implements EmployerService {
     @Override
     public Result add(Employer employer) {
 
-        if (!isFieldsEmpty(
-                employer.getEmail(),
-                employer.getWebsite(),
-                employer.getEmail(),
-                employer.getPasswordHash(),
-                employer.getPhoneNumber(),
-                employer.getCompanyName())
-        ) {
-            return new ErrorResult(Messages.requiredFields);
-        } else if (!isCompanyEmail(employer.getEmail(), employer.getWebsite())) {
+        if (!isCompanyEmail(employer.getEmail(), employer.getWebsite())) {
             return new ErrorResult(Messages.wrongMailFormat);
         } else if (this.employerDao.findByEmail(employer.getEmail()) != null) {
             return new ErrorResult(Messages.existInSystem);
@@ -69,14 +60,5 @@ public class EmployerManager implements EmployerService {
         Pattern pattern = Pattern.compile(emailRegex);
 
         return pattern.matcher(email).matches();
-    }
-
-    public boolean isFieldsEmpty(String... args) {
-        for (String s : args) {
-            if (s.isEmpty() || s == null) {
-                return true;
-            }
-        }
-        return false;
     }
 }

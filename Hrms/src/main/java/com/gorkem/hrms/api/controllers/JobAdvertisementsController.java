@@ -7,6 +7,7 @@ import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class JobAdvertisementsController {
     }
 
     @GetMapping("/findByEmployerId")
-    public DataResult<List<JobAdvertisement>> findByEmployerId(int id) {
+    public DataResult<List<JobAdvertisement>> findByEmployerId(@Positive int id) {
         return this.jobAdvertisementService.findByEmployerId(id);
     }
 
@@ -52,7 +53,7 @@ public class JobAdvertisementsController {
     }
 
     @PutMapping("/updateStatusJobAdvertisement")
-    public DataResult<JobAdvertisement> updateStatusJobAdvertisement(@RequestParam int id, @RequestParam boolean status) {
+    public DataResult<JobAdvertisement> updateStatusJobAdvertisement(@Positive @RequestParam int id, @RequestParam boolean status) {
         return this.jobAdvertisementService.updateStatusJobAdvertisement(id, status);
     }
 }
