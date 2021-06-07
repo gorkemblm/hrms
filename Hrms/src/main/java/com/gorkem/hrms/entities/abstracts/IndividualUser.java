@@ -1,5 +1,6 @@
 package com.gorkem.hrms.entities.abstracts;
 
+import com.gorkem.hrms.core.entities.User;
 import lombok.*;
 
 import javax.persistence.*;
