@@ -6,9 +6,8 @@ import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.SocialMediaAccountDao;
-import com.gorkem.hrms.entities.concretes.CurriculumVitae;
 import com.gorkem.hrms.entities.concretes.SocialMediaAccount;
-import com.gorkem.hrms.entities.dtos.SocialMediaAccountForCurriculumVitaeDto;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.SocialMediaAccountForCurriculumVitaeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

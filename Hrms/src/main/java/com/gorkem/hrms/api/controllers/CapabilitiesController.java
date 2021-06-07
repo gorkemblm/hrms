@@ -2,7 +2,7 @@ package com.gorkem.hrms.api.controllers;
 
 import com.gorkem.hrms.business.abstracts.CapabilityService;
 import com.gorkem.hrms.core.utilities.results.Result;
-import com.gorkem.hrms.entities.dtos.CapabilityForCurriculumVitaeDto;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CapabilityForCurriculumVitaeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +22,7 @@ public class CapabilitiesController {
 
     @PostMapping("/addForJobSeeker")
     public Result addForJobSeeker(@RequestBody CapabilityForCurriculumVitaeDto capabilityForCurriculumVitaeDto) {
+
         return this.capabilityService.addForJobSeeker(capabilityForCurriculumVitaeDto);
     }
 }

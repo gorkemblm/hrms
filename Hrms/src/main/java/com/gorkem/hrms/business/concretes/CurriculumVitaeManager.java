@@ -8,7 +8,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessDataResult;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.CurriculumVitaeDao;
 import com.gorkem.hrms.entities.concretes.*;
-import com.gorkem.hrms.entities.dtos.*;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CoverLetterForCurriculumVitaeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

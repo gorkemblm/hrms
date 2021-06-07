@@ -1,4 +1,4 @@
-package com.gorkem.hrms.core.adapters.mernis;
+/*package com.gorkem.hrms.core.adapters.mernis;
 
 import com.gorkem.hrms.MernisService.INLKPSPublicSoap;
 import com.gorkem.hrms.business.abstracts.UserCheckService;
@@ -25,4 +25,4 @@ public class MernisServiceAdapter implements UserCheckService {
         }
         return false;
     }
-}
+}*/
