@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -21,12 +24,17 @@ public class WorkExperience {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Company name cannot be empty")
+    @Size(max = 256, message = "Company name cannot exceed 255 characters")
     @Column(name = "company_name", length = 256, nullable = false)
     private String companyName;
 
+    @NotBlank(message = "Position cannot be empty")
+    @Size(max = 128, message = "Position name cannot exceed 128 characters")
     @Column(name = "position", length = 128, nullable = false)
     private String position;
 
+    @PastOrPresent
     @Column(name = "started_date", nullable = false)
     private LocalDate startedDate;
 

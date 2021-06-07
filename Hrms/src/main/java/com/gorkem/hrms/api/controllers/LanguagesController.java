@@ -3,12 +3,14 @@ package com.gorkem.hrms.api.controllers;
 import com.gorkem.hrms.business.abstracts.LanguageService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.Language;
-import com.gorkem.hrms.entities.dtos.LanguageForCurriculumVitaeDto;
+import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.LanguageForCurriculumVitaeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/languages")
@@ -27,7 +29,7 @@ public class LanguagesController {
     }
 
     @PostMapping("/addLanguageForJobSeeker")
-    public Result addLanguageForJobSeeker(@RequestBody LanguageForCurriculumVitaeDto languageForCurriculumVitaeDto) {
+    public Result addLanguageForJobSeeker(@Valid @RequestBody LanguageForCurriculumVitaeDto languageForCurriculumVitaeDto) {
         return this.languageService.addLanguageForJobSeeker(languageForCurriculumVitaeDto);
     }
 }

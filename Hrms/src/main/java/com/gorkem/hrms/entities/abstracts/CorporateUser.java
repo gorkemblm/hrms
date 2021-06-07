@@ -1,6 +1,7 @@
 package com.gorkem.hrms.entities.abstracts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gorkem.hrms.core.entities.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,10 +16,10 @@ import javax.persistence.*;
 @Table(name = "corporate_users")
 public abstract class CorporateUser extends User {
 
-    @Column(name = "company_name", nullable = false, length = 255)
+    @Column(name = "company_name", nullable = false, length = 256)
     private String companyName;
 
-    @Column(name = "web_site", nullable = false, length = 255)
+    @Column(name = "web_site", nullable = false, length = 256)
     private String website;
 
     @Column(name = "phone_number", length = 13, nullable = false)

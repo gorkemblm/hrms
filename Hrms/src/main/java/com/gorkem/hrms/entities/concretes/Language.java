@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,7 +25,8 @@ public class Language {
     @Column(name = "language", length = 50, nullable = false)
     private String language;
 
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 5, message = "Level must be between 1 and 5")
+    @Positive
     @Column(name = "level", nullable = false)
     private int level;
 
