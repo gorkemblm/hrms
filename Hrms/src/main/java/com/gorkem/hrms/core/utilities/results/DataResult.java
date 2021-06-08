@@ -18,8 +18,4 @@ public class DataResult<T> extends Result {
     public T getData() {
         return data;
     }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

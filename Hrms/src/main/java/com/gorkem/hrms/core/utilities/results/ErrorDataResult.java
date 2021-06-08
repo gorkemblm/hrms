@@ -1,6 +1,5 @@
 package com.gorkem.hrms.core.utilities.results;
 
-import lombok.Getter;
 
 public class ErrorDataResult<T> extends DataResult<T> {
 
