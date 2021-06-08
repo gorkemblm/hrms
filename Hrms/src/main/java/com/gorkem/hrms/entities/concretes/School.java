@@ -34,6 +34,10 @@ public class School {
     @Column(name = "department", length = 128, nullable = false)
     private String department;
 
+    @NotBlank(message = "Graduation description cannot be empty")
+    @Column(name = "graduation_description", length = 56)
+    private String graduationDescription;
+
     @PastOrPresent
     @Column(name = "started_date", nullable = false)
     private LocalDate startedDate;
