@@ -4,7 +4,6 @@ import com.gorkem.hrms.business.abstracts.ImageService;
 import com.gorkem.hrms.business.abstracts.UserService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.adapters.cloudinary.CloudinaryService;
-import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.ImageDao;

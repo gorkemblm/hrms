@@ -5,7 +5,6 @@ import com.gorkem.hrms.entities.concretes.Image;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -21,7 +20,6 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    //regex eklenebilir!
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

@@ -14,5 +14,4 @@ import javax.persistence.Table;
 @Table(name = "company_employees")
 @PrimaryKeyJoinColumn(name = "company_employee_id")
 public class CompanyEmployee extends IndividualUser {
-
 }
