@@ -1,8 +1,11 @@
 package com.gorkem.hrms.core.utilities.email;
 
+import com.gorkem.hrms.business.constants.Messages;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("defaultEmailService")
 public class EmailManager implements EmailService {
 
     @Override
@@ -12,6 +15,6 @@ public class EmailManager implements EmailService {
 
     @Override
     public String sendToVerificationMail(String email) {
-        return "Confirmation email has been sent. Please check your inbox";
+        return Messages.sendToVerificationMail;
     }
 }
