@@ -36,4 +36,9 @@ public class SchoolsController {
     public Result addSchoolForJobSeeker(@Valid @RequestBody SchoolForCurriculumVitaeDto schoolForCurriculumVitaeDto) {
         return this.schoolService.addSchoolForJobSeeker(schoolForCurriculumVitaeDto);
     }
+
+    @GetMapping("/findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc")
+    public DataResult<List<School>> findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc(@RequestParam int id) {
+        return this.schoolService.findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc(id);
+    }
 }

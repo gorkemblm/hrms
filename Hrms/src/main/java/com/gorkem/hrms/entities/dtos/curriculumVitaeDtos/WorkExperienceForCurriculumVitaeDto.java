@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class WorkExperienceForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     @NotBlank(message = "Company name cannot be empty")
     @Size(max = 256)

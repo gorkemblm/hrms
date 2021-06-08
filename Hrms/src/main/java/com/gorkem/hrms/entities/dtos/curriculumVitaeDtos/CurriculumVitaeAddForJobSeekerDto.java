@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SocialMediaAccountForCurriculumVitaeDto {
+public class CurriculumVitaeAddForJobSeekerDto {
 
     private int jobSeekerId;
-
-    private String type;
-
-    private String url;
 }

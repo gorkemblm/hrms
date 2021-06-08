@@ -33,7 +33,7 @@ public class SocialMediaAccountManager implements SocialMediaAccountService {
     public Result addSocialMediaAccountForJobSeeker(SocialMediaAccountForCurriculumVitaeDto socialMediaAccountForCurriculumVitaeDto) {
         SocialMediaAccount socialMediaAccount = new SocialMediaAccount();
 
-        socialMediaAccount.setCurriculumVitae(this.curriculumVitaeService.findById(socialMediaAccountForCurriculumVitaeDto.getCurriculumVitaeId()));
+        socialMediaAccount.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(socialMediaAccountForCurriculumVitaeDto.getJobSeekerId()));
 
         socialMediaAccount.setType(socialMediaAccountForCurriculumVitaeDto.getType());
         socialMediaAccount.setUrl(socialMediaAccountForCurriculumVitaeDto.getUrl());

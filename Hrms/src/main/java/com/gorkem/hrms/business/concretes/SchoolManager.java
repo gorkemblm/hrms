@@ -39,11 +39,16 @@ public class SchoolManager implements SchoolService {
     }
 
     @Override
+    public DataResult<List<School>> findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc(int id) {
+        return new SuccessDataResult<>(Messages.successfullyListed,this.schoolDao.findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc(id));
+    }
+
+    @Override
     public Result addSchoolForJobSeeker(SchoolForCurriculumVitaeDto schoolForCurriculumVitaeDto) {
 
         School school = new School();
 
-        school.setCurriculumVitae(this.curriculumVitaeService.findById(schoolForCurriculumVitaeDto.getCurriculumVitaeId()));
+        school.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(schoolForCurriculumVitaeDto.getJobSeekerId()));
 
         school.setSchoolName(schoolForCurriculumVitaeDto.getSchoolName());
 
@@ -51,8 +56,10 @@ public class SchoolManager implements SchoolService {
         school.setStartedDate(schoolForCurriculumVitaeDto.getStartedDateSchool());
 
         if (schoolForCurriculumVitaeDto.isGraduationStatus()) {
+            school.setGraduationDescription("Finished");
             school.setFinishedDate(schoolForCurriculumVitaeDto.getFinishedDateSchool());
         } else {
+            school.setGraduationDescription("Continues");
             school.setGraduationStatus(schoolForCurriculumVitaeDto.isGraduationStatus());
         }
 

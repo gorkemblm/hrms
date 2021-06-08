@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CapabilityForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     private String capabilityType;
 

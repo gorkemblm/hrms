@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SchoolForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     @NotBlank(message = "School name cannot be empty")
     @Size(max = 256, message = "School name cannot exceed 255 characters")
