@@ -14,4 +14,6 @@ public interface SchoolService {
     Result add(School school);
 
     Result addSchoolForJobSeeker(SchoolForCurriculumVitaeDto schoolForCurriculumVitaeDto);
+
+    DataResult<List<School>> findByCurriculumVitae_JobSeeker_IdOrderByGraduationDescriptionAscFinishedDateDesc(int id);
 }
