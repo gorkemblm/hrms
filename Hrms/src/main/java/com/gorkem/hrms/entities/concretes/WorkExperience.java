@@ -34,6 +34,10 @@ public class WorkExperience {
     @Column(name = "position", length = 128, nullable = false)
     private String position;
 
+    @NotBlank(message = "Working description cannot be empty")
+    @Column(name = "working_description", length = 56)
+    private String workingDescription;
+
     @PastOrPresent
     @Column(name = "started_date", nullable = false)
     private LocalDate startedDate;

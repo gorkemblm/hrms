@@ -29,7 +29,7 @@ public class JobSeekerForRegisterDto {
     private String lastName;
 
     @NotBlank(message = "Identity number value cannot be empty")
-    @Size(max = 11, min = 11, message = "Identity number must consist of 11 characters")
+    @Size(message = "Identity number must consist of 11 characters")
     private String identityNumber;
 
     @NotNull(message = "Date of birth value cannot be empty")
