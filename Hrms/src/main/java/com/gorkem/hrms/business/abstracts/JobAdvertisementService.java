@@ -3,6 +3,7 @@ package com.gorkem.hrms.business.abstracts;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
+import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +12,7 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisement>> getAll();
 
-    Result add(JobAdvertisement jobAdvertisement);
+    Result add(JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto);
 
     DataResult<List<JobAdvertisement>> findByIsActiveTrue();
 
