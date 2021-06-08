@@ -34,7 +34,7 @@ public class LanguageManager implements LanguageService {
 
         Language language = new Language();
 
-        language.setCurriculumVitae(this.curriculumVitaeService.findById(languageForCurriculumVitaeDto.getCurriculumVitaeId()));
+        language.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(languageForCurriculumVitaeDto.getJobSeekerId()));
 
         language.setLanguage(languageForCurriculumVitaeDto.getLanguage());
         language.setLevel(languageForCurriculumVitaeDto.getLevel());
