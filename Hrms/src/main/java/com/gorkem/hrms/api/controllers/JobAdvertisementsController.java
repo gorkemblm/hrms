@@ -4,6 +4,7 @@ import com.gorkem.hrms.business.abstracts.JobAdvertisementService;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
+import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,9 +43,9 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.findByEmployer_CompanyName(companyName);
     }
 
-    @PostMapping("/add")
-    public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-        return this.jobAdvertisementService.add(jobAdvertisement);
+    @PostMapping("/addJobAdvertisementForEmployer")
+    public Result add(@RequestBody JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
+        return this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
     }
 
     @PostMapping("/findByUpdatedAtAndIsActiveTrue")

@@ -1,6 +1,9 @@
 package com.gorkem.hrms.business.concretes;
 
+import com.gorkem.hrms.business.abstracts.CityService;
+import com.gorkem.hrms.business.abstracts.EmployerService;
 import com.gorkem.hrms.business.abstracts.JobAdvertisementService;
+import com.gorkem.hrms.business.abstracts.OccupationService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
@@ -8,6 +11,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessDataResult;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
+import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +22,20 @@ import java.util.List;
 public class JobAdvertisementManager implements JobAdvertisementService {
 
     private JobAdvertisementDao jobAdvertisementDao;
+    private EmployerService employerService;
+    private OccupationService occupationService;
+    private CityService cityService;
 
     @Autowired
-    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao) {
+    public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao
+            ,EmployerService employerService
+            ,OccupationService occupationService
+            ,CityService cityService) {
+
         this.jobAdvertisementDao = jobAdvertisementDao;
+        this.employerService = employerService;
+        this.occupationService = occupationService;
+        this.cityService = cityService;
     }
 
     @Override
@@ -30,8 +44,27 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public Result add(JobAdvertisement jobAdvertisement) {
+    public Result add(JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
+        JobAdvertisement jobAdvertisement = new JobAdvertisement();
+
+        jobAdvertisement.setNumberOfApplication(0);
+        jobAdvertisement.setApproveStatus(false);
+        jobAdvertisement.setActive(false);
+
+        jobAdvertisement.setEmployer(this.employerService.findById(jobAdvertisementForEmployerDto.getEmployerId()));
+
+        jobAdvertisement.setCity(this.cityService.findByCity(jobAdvertisementForEmployerDto.getCity()));
+
+        jobAdvertisement.setOccupation(this.occupationService.findByName(jobAdvertisementForEmployerDto.getOccupation()));
+
+        jobAdvertisement.setJobDescription(jobAdvertisementForEmployerDto.getJobDescription());
+
+        jobAdvertisement.setApplicationDeadline(jobAdvertisementForEmployerDto.getApplicationDeadline());
+
+        jobAdvertisement.setNumberOfOpenPosition(jobAdvertisementForEmployerDto.getNumberOfOpenPosition());
+
         this.jobAdvertisementDao.save(jobAdvertisement);
+
         return new SuccessResult(Messages.successfullyAdded);
     }
 
