@@ -7,6 +7,7 @@ import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.dataAccess.abstracts.EmployerDao;
 import com.gorkem.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,14 +20,21 @@ public class EmployerManager implements EmployerService {
     private EmailService emailService;
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, EmailService emailService) {
+    public EmployerManager(EmployerDao employerDao
+            ,@Qualifier("defaultEmailService") EmailService emailService) {
+
         this.employerDao = employerDao;
         this.emailService = emailService;
     }
 
     @Override
+    public Employer findById(int id) {
+        return this.employerDao.findById(id);
+    }
+
+    @Override
     public DataResult<List<Employer>> getAll() {
-        return new SuccessDataResult<List<Employer>>(Messages.successfullyListed, this.employerDao.findAll());
+        return new SuccessDataResult<>(Messages.successfullyListed, this.employerDao.findAll());
     }
 
     @Override
@@ -46,19 +54,17 @@ public class EmployerManager implements EmployerService {
 
     private boolean isCompanyEmail(String email, String webSite) {
 
-        if (email == null || email.isEmpty()) return false;
+        if (email == null || email.isEmpty()) {
+            return false;
+        }else {
+            String[] array = webSite.split("www.");
 
-        String[] array = webSite.split(".");
+            String finalString = array[1];
 
-        String finalString = "";
+            String emailRegex = "info@" + finalString;
+            Pattern pattern = Pattern.compile(emailRegex);
 
-        for (int i = 1; i < array.length; i++) {
-            finalString += array[i];
+            return pattern.matcher(email).matches();
         }
-
-        String emailRegex = "info@" + finalString;
-        Pattern pattern = Pattern.compile(emailRegex);
-
-        return pattern.matcher(email).matches();
     }
 }
