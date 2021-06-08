@@ -18,6 +18,8 @@ public class Messages {
 
     public static String notVerifyMail = "This mail is not verified, please check it.";
 
+    public static String sendToVerificationMail = "Confirmation email has been sent. Please check your inbox";
+
     //Jobseeker
     public static String notExistGovernment = "Your information is not registered in the government system.";
 
