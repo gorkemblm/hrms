@@ -21,6 +21,11 @@ public class OccupationManager implements OccupationService {
     }
 
     @Override
+    public Occupation findByName(String name) {
+        return this.occupationDao.findByName(name);
+    }
+
+    @Override
     public DataResult<List<Occupation>> getAll() {
         return new SuccessDataResult<List<Occupation>>(Messages.successfullyListed, this.occupationDao.findAll());
     }

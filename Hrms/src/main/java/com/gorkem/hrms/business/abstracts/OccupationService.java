@@ -11,4 +11,6 @@ public interface OccupationService {
     DataResult<List<Occupation>> getAll();
 
     Result add(Occupation occupation);
+
+    Occupation findByName(String name);
 }

@@ -4,11 +4,7 @@ import com.gorkem.hrms.business.abstracts.AuthService;
 import com.gorkem.hrms.business.abstracts.EmployerService;
 import com.gorkem.hrms.business.abstracts.JobSeekerService;
 import com.gorkem.hrms.business.abstracts.UserService;
-import com.gorkem.hrms.business.constants.Messages;
-import com.gorkem.hrms.core.utilities.results.ErrorResult;
-import com.gorkem.hrms.core.utilities.results.Result;
-import com.gorkem.hrms.core.utilities.results.SuccessResult;
-import com.gorkem.hrms.entities.concretes.CurriculumVitae;
+import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.entities.concretes.Employer;
 import com.gorkem.hrms.entities.concretes.JobSeeker;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
@@ -57,9 +53,7 @@ public class AuthManager implements AuthService {
         jobSeeker.setIdentityNumber(jobSeekerForRegisterDto.getIdentityNumber());
         jobSeeker.setDateOfBirth(jobSeekerForRegisterDto.getDateOfBirth());
 
-        this.jobSeekerService.add(jobSeeker);
-
-        return new SuccessResult(Messages.successfullyAdded);
+        return this.jobSeekerService.add(jobSeeker);
     }
 
     @Override
@@ -70,13 +64,12 @@ public class AuthManager implements AuthService {
 
         employer.setApproveStatus(false);
 
+        employer.setWebsite(employerForRegisterDto.getWebSite());
         employer.setEmail(employerForRegisterDto.getEmail());
         employer.setPasswordHash(employerForRegisterDto.getPassword());
         employer.setCompanyName(employerForRegisterDto.getCompanyName());
         employer.setPhoneNumber(employerForRegisterDto.getPhoneNumber());
 
-        this.employerService.add(employer);
-
-        return new SuccessResult(Messages.successfullyAdded);
+        return this.employerService.add(employer);
     }
 }
