@@ -33,7 +33,7 @@ public class CapabilityManager implements CapabilityService {
     public Result addForJobSeeker(CapabilityForCurriculumVitaeDto capabilityForCurriculumVitaeDto) {
         Capability capability = new Capability();
 
-        capability.setCurriculumVitae(this.curriculumVitaeService.findById(capabilityForCurriculumVitaeDto.getCurriculumVitaeId()));
+        capability.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(capabilityForCurriculumVitaeDto.getJobSeekerId()));
 
         capability.setType(capabilityForCurriculumVitaeDto.getCapabilityType());
         capability.setName(capabilityForCurriculumVitaeDto.getCapabilityName());
