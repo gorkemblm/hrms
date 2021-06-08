@@ -36,7 +36,7 @@ public class CurriculumVitae {
     @OneToOne
     @MapsId
     @JoinColumn(name = "job_seeker_id")
-    @JsonIncludeProperties({"id"})
+    @JsonIncludeProperties({"firstName","lastName"})
     private JobSeeker jobSeeker;
 
     @OneToMany(mappedBy = "curriculumVitae")

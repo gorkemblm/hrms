@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -33,6 +32,7 @@ public class Occupation {
     @Column(name = "is_active")
     private boolean isActive;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "occupation")
     private List<JobAdvertisement> jobAdvertisements;
 }

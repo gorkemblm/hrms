@@ -1,6 +1,7 @@
 package com.gorkem.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class JobAdvertisement {
     @Column(name = "approve_status")
     private boolean approveStatus;
 
+    @JsonIgnore
     @Size(max = 1200, message = "Description cannot exceed 1200 characters")
     @Column(name = "job_description", length = 1200, nullable = false)
     private String jobDescription;
@@ -55,14 +57,17 @@ public class JobAdvertisement {
 
     @ManyToOne
     @JoinColumn(name = "employer_id")
+    @JsonIncludeProperties({"companyName"})
     private Employer employer;
 
     @ManyToOne
     @JoinColumn(name = "occupation_id")
+    @JsonIncludeProperties({"name"})
     private Occupation occupation;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
+    @JsonIncludeProperties({"city"})
     private City city;
 }
 

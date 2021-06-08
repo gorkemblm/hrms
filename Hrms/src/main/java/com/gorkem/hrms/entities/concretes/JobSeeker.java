@@ -2,6 +2,7 @@ package com.gorkem.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.gorkem.hrms.entities.abstracts.IndividualUser;
 import lombok.*;
 
@@ -25,5 +26,6 @@ public class JobSeeker extends IndividualUser {
 
     @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @JsonIncludeProperties({"id"})
     private CurriculumVitae curriculumVitae;
 }
