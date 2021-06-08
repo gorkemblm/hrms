@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SocialMediaAccountForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     private String type;
 

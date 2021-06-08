@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class CoverLetterForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     @NotBlank(message = "Cover letter cannot exceed 1200 characters")
     @Size(max = 1200)

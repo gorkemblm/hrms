@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class LanguageForCurriculumVitaeDto {
 
-    private int curriculumVitaeId;
+    private int jobSeekerId;
 
     private String language;
 
