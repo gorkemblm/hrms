@@ -10,6 +10,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.SchoolDao;
 import com.gorkem.hrms.entities.concretes.School;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.SchoolForCurriculumVitaeDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,13 @@ public class SchoolManager implements SchoolService {
 
     private SchoolDao schoolDao;
     private CurriculumVitaeService curriculumVitaeService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public SchoolManager(SchoolDao schoolDao, CurriculumVitaeService curriculumVitaeService) {
+    public SchoolManager(SchoolDao schoolDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.schoolDao = schoolDao;
         this.curriculumVitaeService = curriculumVitaeService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -46,14 +49,7 @@ public class SchoolManager implements SchoolService {
     @Override
     public Result addSchoolForJobSeeker(SchoolForCurriculumVitaeDto schoolForCurriculumVitaeDto) {
 
-        School school = new School();
-
-        school.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(schoolForCurriculumVitaeDto.getJobSeekerId()));
-
-        school.setSchoolName(schoolForCurriculumVitaeDto.getSchoolName());
-
-        school.setDepartment(schoolForCurriculumVitaeDto.getDepartment());
-        school.setStartedDate(schoolForCurriculumVitaeDto.getStartedDateSchool());
+        School school = modelMapper.map(schoolForCurriculumVitaeDto, School.class);
 
         if (schoolForCurriculumVitaeDto.isGraduationStatus()) {
             school.setGraduationDescription("Finished");

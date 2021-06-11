@@ -12,6 +12,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +26,20 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     private EmployerService employerService;
     private OccupationService occupationService;
     private CityService cityService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao
             ,EmployerService employerService
             ,OccupationService occupationService
-            ,CityService cityService) {
+            ,CityService cityService
+            ,ModelMapper modelMapper) {
 
         this.jobAdvertisementDao = jobAdvertisementDao;
         this.employerService = employerService;
         this.occupationService = occupationService;
         this.cityService = cityService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -45,23 +49,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     @Override
     public Result add(JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
-        JobAdvertisement jobAdvertisement = new JobAdvertisement();
+        JobAdvertisement jobAdvertisement = modelMapper.map(jobAdvertisementForEmployerDto, JobAdvertisement.class);
 
         jobAdvertisement.setNumberOfApplication(0);
         jobAdvertisement.setApproveStatus(false);
         jobAdvertisement.setActive(false);
-
-        jobAdvertisement.setEmployer(this.employerService.findById(jobAdvertisementForEmployerDto.getEmployerId()));
-
-        jobAdvertisement.setCity(this.cityService.findByCity(jobAdvertisementForEmployerDto.getCity()));
-
-        jobAdvertisement.setOccupation(this.occupationService.findByName(jobAdvertisementForEmployerDto.getOccupation()));
-
-        jobAdvertisement.setJobDescription(jobAdvertisementForEmployerDto.getJobDescription());
-
-        jobAdvertisement.setApplicationDeadline(jobAdvertisementForEmployerDto.getApplicationDeadline());
-
-        jobAdvertisement.setNumberOfOpenPosition(jobAdvertisementForEmployerDto.getNumberOfOpenPosition());
 
         this.jobAdvertisementDao.save(jobAdvertisement);
 

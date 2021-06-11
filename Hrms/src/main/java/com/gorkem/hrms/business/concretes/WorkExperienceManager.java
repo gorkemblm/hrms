@@ -10,6 +10,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.WorkExperinceDao;
 import com.gorkem.hrms.entities.concretes.WorkExperience;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.WorkExperienceForCurriculumVitaeDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,13 @@ public class WorkExperienceManager implements WorkExperienceService {
 
     private WorkExperinceDao workExperinceDao;
     private CurriculumVitaeService curriculumVitaeService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public WorkExperienceManager(WorkExperinceDao workExperinceDao, CurriculumVitaeService curriculumVitaeService) {
+    public WorkExperienceManager(WorkExperinceDao workExperinceDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.workExperinceDao = workExperinceDao;
         this.curriculumVitaeService = curriculumVitaeService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -40,13 +43,7 @@ public class WorkExperienceManager implements WorkExperienceService {
 
     @Override
     public Result addWorkExperienceForJobSeeker(WorkExperienceForCurriculumVitaeDto workExperienceForCurriculumVitaeDto) {
-        WorkExperience workExperience = new WorkExperience();
-
-        workExperience.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(workExperienceForCurriculumVitaeDto.getJobSeekerId()));
-
-        workExperience.setCompanyName(workExperienceForCurriculumVitaeDto.getCompanyName());
-        workExperience.setPosition(workExperienceForCurriculumVitaeDto.getPosition());
-        workExperience.setStartedDate(workExperienceForCurriculumVitaeDto.getStartedDateJob());
+        WorkExperience workExperience = modelMapper.map(workExperienceForCurriculumVitaeDto, WorkExperience.class);
 
         if (!workExperienceForCurriculumVitaeDto.isStillWork()) {
             workExperience.setFinishedDate(workExperienceForCurriculumVitaeDto.getFinishedDateJob());
