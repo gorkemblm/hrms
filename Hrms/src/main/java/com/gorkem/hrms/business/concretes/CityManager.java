@@ -26,7 +26,7 @@ public class CityManager implements CityService {
     }
 
     @Override
-    public City findByCity(String city) {
-        return this.cityDao.findByCity(city);
+    public City findByCityName(String city) {
+        return this.cityDao.findByCityName(city);
     }
 }

@@ -23,8 +23,8 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password_hash", nullable = false, length = 2048)
-    private String passwordHash;
+    @Column(name = "password", nullable = false, length = 2048)
+    private String password;
 
     @JsonIgnore
     @Column(name = "created_at")

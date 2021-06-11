@@ -13,11 +13,11 @@ public class JobAdvertisementForEmployerDto {
 
     private int employerId;
 
-    private String occupation;
+    private String occupationName;
 
     private String jobDescription;
 
-    private String city;
+    private String cityName;
 
     private int numberOfOpenPosition;
 
