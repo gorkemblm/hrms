@@ -12,6 +12,7 @@ import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/jobAdvertisements")
 public class JobAdvertisementsController {

@@ -4,11 +4,9 @@ import com.gorkem.hrms.business.abstracts.CityService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/cities")
 public class CitiesController {
