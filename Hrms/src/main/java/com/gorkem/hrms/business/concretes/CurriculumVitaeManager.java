@@ -10,6 +10,7 @@ import com.gorkem.hrms.dataAccess.abstracts.CurriculumVitaeDao;
 import com.gorkem.hrms.entities.concretes.*;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CoverLetterForCurriculumVitaeDto;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CurriculumVitaeAddForJobSeekerDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,13 @@ public class CurriculumVitaeManager implements CurriculumVitaeService {
 
     private CurriculumVitaeDao curriculumVitaeDao;
     private JobSeekerService jobSeekerService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public CurriculumVitaeManager(CurriculumVitaeDao curriculumVitaeDao, JobSeekerService jobSeekerService) {
-
+    public CurriculumVitaeManager(CurriculumVitaeDao curriculumVitaeDao, JobSeekerService jobSeekerService, ModelMapper modelMapper) {
         this.curriculumVitaeDao = curriculumVitaeDao;
         this.jobSeekerService = jobSeekerService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -40,9 +42,10 @@ public class CurriculumVitaeManager implements CurriculumVitaeService {
 
     @Override
     public Result curriculumVitaeAddForJobSeeker(CurriculumVitaeAddForJobSeekerDto curriculumVitaeAddForJobSeekerDto) {
-        CurriculumVitae curriculumVitae = new CurriculumVitae();
-        curriculumVitae.setJobSeeker(this.jobSeekerService.findById(curriculumVitaeAddForJobSeekerDto.getJobSeekerId()));
+        CurriculumVitae curriculumVitae = modelMapper.map(curriculumVitaeAddForJobSeekerDto, CurriculumVitae.class);
+
         this.curriculumVitaeDao.save(curriculumVitae);
+
         return new SuccessResult(Messages.successfullyAdded);
     }
 
@@ -54,9 +57,8 @@ public class CurriculumVitaeManager implements CurriculumVitaeService {
     @Override
     public Result addCoverLetterForJobSeeker(CoverLetterForCurriculumVitaeDto coverLetterForCurriculumVitaeDto) {
 
-        CurriculumVitae curriculumVitae = this.curriculumVitaeDao.findByJobSeeker_Id(coverLetterForCurriculumVitaeDto.getJobSeekerId());
+        CurriculumVitae curriculumVitae = modelMapper.map(coverLetterForCurriculumVitaeDto, CurriculumVitae.class);
 
-        curriculumVitae.setCoverLetter(coverLetterForCurriculumVitaeDto.getCoverLetter());
         this.curriculumVitaeDao.save(curriculumVitae);
 
         return new SuccessResult(Messages.successfullyAdded);

@@ -13,5 +13,5 @@ public interface UserService {
 
     User findById(int id);
 
-    boolean findByEmailAndPasswordHash(String email, String password);
+    boolean findByEmailAndPassword(String email, String password);
 }

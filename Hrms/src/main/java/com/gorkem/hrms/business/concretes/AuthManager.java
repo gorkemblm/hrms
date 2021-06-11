@@ -10,6 +10,7 @@ import com.gorkem.hrms.entities.concretes.JobSeeker;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.JobSeekerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.UserForLoginDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +20,19 @@ public class AuthManager implements AuthService {
     private JobSeekerService jobSeekerService;
     private EmployerService employerService;
     private UserService userService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public AuthManager(JobSeekerService jobSeekerService, EmployerService employerService, UserService userService) {
+    public AuthManager(JobSeekerService jobSeekerService, EmployerService employerService, UserService userService, ModelMapper modelMapper) {
         this.jobSeekerService = jobSeekerService;
         this.employerService = employerService;
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public Result loginForUser(UserForLoginDto userForLoginDto) {
-        boolean result = this.userService.findByEmailAndPasswordHash(userForLoginDto.getEmail(), userForLoginDto.getPassword());
+        boolean result = this.userService.findByEmailAndPassword(userForLoginDto.getEmail(), userForLoginDto.getPassword());
 
         if (!result) {
             return new ErrorResult();
@@ -40,35 +43,24 @@ public class AuthManager implements AuthService {
 
     @Override
     public Result registerForJobSeeker(JobSeekerForRegisterDto jobSeekerForRegisterDto) {
-        JobSeeker jobSeeker = new JobSeeker();
+
+        JobSeeker jobSeeker = modelMapper.map(jobSeekerForRegisterDto, JobSeeker.class);
 
         jobSeeker.setNumberOfApplication(0);
 
         jobSeeker.setActive(true);
-
-        jobSeeker.setEmail(jobSeekerForRegisterDto.getEmail());
-        jobSeeker.setPasswordHash(jobSeekerForRegisterDto.getPassword());
-        jobSeeker.setFirstName(jobSeekerForRegisterDto.getFirstName());
-        jobSeeker.setLastName(jobSeekerForRegisterDto.getLastName());
-        jobSeeker.setIdentityNumber(jobSeekerForRegisterDto.getIdentityNumber());
-        jobSeeker.setDateOfBirth(jobSeekerForRegisterDto.getDateOfBirth());
 
         return this.jobSeekerService.add(jobSeeker);
     }
 
     @Override
     public Result registerForEmployer(EmployerForRegisterDto employerForRegisterDto) {
-        Employer employer = new Employer();
+
+        Employer employer = modelMapper.map(employerForRegisterDto, Employer.class);
 
         employer.setActive(true);
 
         employer.setApproveStatus(false);
-
-        employer.setWebsite(employerForRegisterDto.getWebSite());
-        employer.setEmail(employerForRegisterDto.getEmail());
-        employer.setPasswordHash(employerForRegisterDto.getPassword());
-        employer.setCompanyName(employerForRegisterDto.getCompanyName());
-        employer.setPhoneNumber(employerForRegisterDto.getPhoneNumber());
 
         return this.employerService.add(employer);
     }

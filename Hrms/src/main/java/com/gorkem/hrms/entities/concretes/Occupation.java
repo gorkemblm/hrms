@@ -22,8 +22,8 @@ public class Occupation {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name", nullable = false, length = 255)
-    private String name;
+    @Column(name = "occupation_name", nullable = false, length = 255)
+    private String occupationName;
 
     @Column(name = "description", length = 512)
     private String description;

@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.gorkem.hrms.configurations.CloudinaryConfig.cloudinary;
+import static com.gorkem.hrms.configuration.ApplicationConfig.cloudinary;
 
 @Service
 public class CloudinaryManagerAdapter implements CloudinaryService {

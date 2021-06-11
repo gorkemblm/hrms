@@ -8,6 +8,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.CapabilityDao;
 import com.gorkem.hrms.entities.concretes.Capability;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CapabilityForCurriculumVitaeDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ public class CapabilityManager implements CapabilityService {
 
     private CapabilityDao capabilityDao;
     private CurriculumVitaeService curriculumVitaeService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public CapabilityManager(CapabilityDao capabilityDao, CurriculumVitaeService curriculumVitaeService) {
+    public CapabilityManager(CapabilityDao capabilityDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.capabilityDao = capabilityDao;
         this.curriculumVitaeService = curriculumVitaeService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -31,12 +34,7 @@ public class CapabilityManager implements CapabilityService {
 
     @Override
     public Result addForJobSeeker(CapabilityForCurriculumVitaeDto capabilityForCurriculumVitaeDto) {
-        Capability capability = new Capability();
-
-        capability.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(capabilityForCurriculumVitaeDto.getJobSeekerId()));
-
-        capability.setType(capabilityForCurriculumVitaeDto.getCapabilityType());
-        capability.setName(capabilityForCurriculumVitaeDto.getCapabilityName());
+        Capability capability = modelMapper.map(capabilityForCurriculumVitaeDto, Capability.class);
 
         this.capabilityDao.save(capability);
 

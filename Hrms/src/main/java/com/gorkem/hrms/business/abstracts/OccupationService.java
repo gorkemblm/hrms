@@ -12,5 +12,5 @@ public interface OccupationService {
 
     Result add(Occupation occupation);
 
-    Occupation findByName(String name);
+    Occupation findByOccupationName(String name);
 }

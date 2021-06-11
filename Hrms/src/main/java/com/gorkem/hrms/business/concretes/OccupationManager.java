@@ -21,8 +21,8 @@ public class OccupationManager implements OccupationService {
     }
 
     @Override
-    public Occupation findByName(String name) {
-        return this.occupationDao.findByName(name);
+    public Occupation findByOccupationName(String name) {
+        return this.occupationDao.findByOccupationName(name);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class OccupationManager implements OccupationService {
 
     @Override
     public Result add(Occupation occupation) {
-        if (this.occupationDao.findByName(occupation.getName()) != null) {
+        if (this.occupationDao.findByOccupationName(occupation.getOccupationName()) != null) {
             return new ErrorResult(Messages.existInRecords);
         } else {
             this.occupationDao.save(occupation);

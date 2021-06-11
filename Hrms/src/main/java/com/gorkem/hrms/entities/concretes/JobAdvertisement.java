@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -63,11 +64,13 @@ public class JobAdvertisement {
     @ManyToOne
     @JoinColumn(name = "occupation_id")
     @JsonIncludeProperties({"name"})
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Occupation occupation;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
     @JsonIncludeProperties({"city"})
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private City city;
 }
 

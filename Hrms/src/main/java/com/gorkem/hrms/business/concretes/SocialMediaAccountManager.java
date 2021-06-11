@@ -8,6 +8,7 @@ import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.SocialMediaAccountDao;
 import com.gorkem.hrms.entities.concretes.SocialMediaAccount;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.SocialMediaAccountForCurriculumVitaeDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ public class SocialMediaAccountManager implements SocialMediaAccountService {
 
     private SocialMediaAccountDao socialMediaAccountDao;
     private CurriculumVitaeService curriculumVitaeService;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public SocialMediaAccountManager(SocialMediaAccountDao socialMediaAccountDao, CurriculumVitaeService curriculumVitaeService) {
+    public SocialMediaAccountManager(SocialMediaAccountDao socialMediaAccountDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.socialMediaAccountDao = socialMediaAccountDao;
         this.curriculumVitaeService = curriculumVitaeService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -31,13 +34,7 @@ public class SocialMediaAccountManager implements SocialMediaAccountService {
 
     @Override
     public Result addSocialMediaAccountForJobSeeker(SocialMediaAccountForCurriculumVitaeDto socialMediaAccountForCurriculumVitaeDto) {
-        SocialMediaAccount socialMediaAccount = new SocialMediaAccount();
-
-        socialMediaAccount.setCurriculumVitae(this.curriculumVitaeService.findByJobSeeker_Id(socialMediaAccountForCurriculumVitaeDto.getJobSeekerId()));
-
-        socialMediaAccount.setType(socialMediaAccountForCurriculumVitaeDto.getType());
-        socialMediaAccount.setUrl(socialMediaAccountForCurriculumVitaeDto.getUrl());
-
+        SocialMediaAccount socialMediaAccount = modelMapper.map(socialMediaAccountForCurriculumVitaeDto, SocialMediaAccount.class);
 
         this.socialMediaAccountDao.save(socialMediaAccount);
 
