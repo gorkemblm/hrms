@@ -1,4 +1,4 @@
-package com.gorkem.hrms.business.abstracts;
+package com.gorkem.hrms.core.adapters;
 
 import com.gorkem.hrms.entities.abstracts.IndividualUser;
 

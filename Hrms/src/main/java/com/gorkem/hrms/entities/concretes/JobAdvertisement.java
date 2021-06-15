@@ -31,7 +31,6 @@ public class JobAdvertisement {
     @Column(name = "approve_status")
     private boolean approveStatus;
 
-    @JsonIgnore
     @Size(max = 1200, message = "Description cannot exceed 1200 characters")
     @Column(name = "job_description", length = 1200, nullable = false)
     private String jobDescription;
@@ -63,15 +62,25 @@ public class JobAdvertisement {
 
     @ManyToOne
     @JoinColumn(name = "occupation_id")
-    @JsonIncludeProperties({"name"})
+    @JsonIncludeProperties({"occupationName"})
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Occupation occupation;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    @JsonIncludeProperties({"city"})
+    @JsonIncludeProperties({"cityName"})
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "way_of_working_id")
+    @JsonIncludeProperties({"type"})
+    private WayOfWorking wayOfWorking;
+
+    @ManyToOne
+    @JoinColumn(name = "working_time_id")
+    @JsonIncludeProperties({"type"})
+    private WorkingTime workingTime;
 }
 
 

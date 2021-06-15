@@ -1,7 +1,7 @@
 package com.gorkem.hrms.business.concretes;
 
 import com.gorkem.hrms.business.abstracts.JobSeekerService;
-import com.gorkem.hrms.business.abstracts.UserCheckService;
+import com.gorkem.hrms.core.adapters.UserCheckService;
 import com.gorkem.hrms.core.utilities.email.EmailService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.*;

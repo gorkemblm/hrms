@@ -1,6 +1,7 @@
 package com.gorkem.hrms.core.adapters.cloudinary;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.gorkem.hrms.core.adapters.BaseImageUploadService;
 import com.gorkem.hrms.core.utilities.results.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,7 @@ import java.util.Map;
 import static com.gorkem.hrms.configuration.ApplicationConfig.cloudinary;
 
 @Service
-public class CloudinaryManagerAdapter implements CloudinaryService {
+public class BaseImageUploadManagerAdapter implements BaseImageUploadService {
 
     @Override
     public DataResult<Map> uploadImageFile(MultipartFile imageFile) {

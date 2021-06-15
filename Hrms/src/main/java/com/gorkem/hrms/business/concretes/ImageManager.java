@@ -3,7 +3,7 @@ package com.gorkem.hrms.business.concretes;
 import com.gorkem.hrms.business.abstracts.ImageService;
 import com.gorkem.hrms.business.abstracts.UserService;
 import com.gorkem.hrms.business.constants.Messages;
-import com.gorkem.hrms.core.adapters.cloudinary.CloudinaryService;
+import com.gorkem.hrms.core.adapters.BaseImageUploadService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.ImageDao;
@@ -19,13 +19,13 @@ import java.util.Map;
 public class ImageManager implements ImageService {
 
     private ImageDao imageDao;
-    private CloudinaryService cloudinaryService;
+    private BaseImageUploadService baseImageUploadService;
     private UserService userService;
 
     @Autowired
-    public ImageManager(ImageDao imageDao, CloudinaryService cloudinaryService, UserService userService) {
+    public ImageManager(ImageDao imageDao, BaseImageUploadService baseImageUploadService, UserService userService) {
         this.imageDao = imageDao;
-        this.cloudinaryService = cloudinaryService;
+        this.baseImageUploadService = baseImageUploadService;
         this.userService = userService;
     }
 
@@ -36,7 +36,7 @@ public class ImageManager implements ImageService {
 
         image.setUser(this.userService.findById(imageWithUserDto.getUserId()));
 
-        Map<String, String> uploadImage = this.cloudinaryService.uploadImageFile(file).getData();
+        Map<String, String> uploadImage = this.baseImageUploadService.uploadImageFile(file).getData();
 
         image.setUrl(uploadImage.get("url"));
 
