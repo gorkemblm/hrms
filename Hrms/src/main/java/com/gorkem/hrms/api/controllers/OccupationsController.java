@@ -30,4 +30,9 @@ public class OccupationsController {
     public Result add(@RequestBody Occupation occupation) {
         return this.occupationService.add(occupation);
     }
+
+    @GetMapping("/findOccupationById")
+    public DataResult<Occupation> findOccupationById(@RequestParam int id) {
+        return this.occupationService.findOccupationById(id);
+    }
 }
