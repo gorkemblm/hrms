@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface OccupationDao extends JpaRepository<Occupation, Integer> {
 
     Occupation findByOccupationName(String name);
+    Occupation findOccupationById(int id);
 }
