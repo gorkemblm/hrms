@@ -11,7 +11,7 @@ public interface UserService {
 
     Result add(User user);
 
-    User findById(int id);
+    DataResult<User> findById(int id);
 
     boolean findByEmailAndPassword(String email, String password);
 }

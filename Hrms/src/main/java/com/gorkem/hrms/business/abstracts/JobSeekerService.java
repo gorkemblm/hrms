@@ -12,5 +12,5 @@ public interface JobSeekerService {
 
     Result add(JobSeeker jobSeeker);
 
-    JobSeeker findById(int id);
+    DataResult<JobSeeker> findById(int id);
 }
