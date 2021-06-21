@@ -28,8 +28,8 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public Employer findById(int id) {
-        return this.employerDao.findById(id);
+    public DataResult<Employer> findById(int id) {
+        return new SuccessDataResult<>(this.employerDao.findById(id));
     }
 
     @Override

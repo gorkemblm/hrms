@@ -34,7 +34,7 @@ public class ImageManager implements ImageService {
 
         Image image = new Image();
 
-        image.setUser(this.userService.findById(imageWithUserDto.getUserId()));
+        image.setUser(this.userService.findById(imageWithUserDto.getUserId()).getData());
 
         Map<String, String> uploadImage = this.baseImageUploadService.uploadImageFile(file).getData();
 
