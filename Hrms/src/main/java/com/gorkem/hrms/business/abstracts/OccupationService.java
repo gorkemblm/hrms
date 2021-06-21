@@ -13,4 +13,6 @@ public interface OccupationService {
     Result add(Occupation occupation);
 
     Occupation findByOccupationName(String name);
+
+    DataResult<Occupation> findOccupationById(int id);
 }

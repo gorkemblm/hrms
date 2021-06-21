@@ -49,7 +49,7 @@ public class JobAdvertisementsController {
         return this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
     }
 
-    @PostMapping("/findByUpdatedAtAndIsActiveTrue")
+    @GetMapping("/findByUpdatedAtAndIsActiveTrue")
     public DataResult<List<JobAdvertisement>> findByUpdatedAtAndIsActiveTrue(@RequestBody LocalDate localDate) {
         return this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate);
     }

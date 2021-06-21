@@ -35,8 +35,8 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public User findById(int id) {
-        return this.userDao.findById((id));
+    public DataResult<User> findById(int id) {
+        return new SuccessDataResult<>(this.userDao.findById(id));
     }
 
     @Override

@@ -29,4 +29,9 @@ public class UsersController {
     public Result add(@RequestBody User user) {
         return this.userService.add(user);
     }
+
+    @GetMapping("/findById")
+    public DataResult<User> findById(@RequestParam int id) {
+        return this.userService.findById(id);
+    }
 }

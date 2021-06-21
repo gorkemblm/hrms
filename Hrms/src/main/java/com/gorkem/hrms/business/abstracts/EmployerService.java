@@ -12,5 +12,5 @@ public interface EmployerService {
 
     Result add(Employer employer);
 
-    Employer findById(int id);
+    DataResult<Employer> findById(int id);
 }

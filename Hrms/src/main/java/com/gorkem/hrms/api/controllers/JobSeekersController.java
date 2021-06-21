@@ -30,4 +30,9 @@ public class JobSeekersController {
     public Result add(@RequestBody JobSeeker jobSeeker) {
         return this.jobSeekerService.add(jobSeeker);
     }
+
+    @GetMapping("/findById")
+    public DataResult<JobSeeker> findById(@RequestParam int id) {
+        return this.jobSeekerService.findById(id);
+    }
 }

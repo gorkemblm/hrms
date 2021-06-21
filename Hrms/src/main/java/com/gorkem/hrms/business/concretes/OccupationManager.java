@@ -39,4 +39,9 @@ public class OccupationManager implements OccupationService {
             return new SuccessResult(Messages.successfullyAdded);
         }
     }
+
+    @Override
+    public DataResult<Occupation> findOccupationById(int id) {
+        return new SuccessDataResult<>(Messages.successfullyListed, this.occupationDao.findOccupationById(id));
+    }
 }
