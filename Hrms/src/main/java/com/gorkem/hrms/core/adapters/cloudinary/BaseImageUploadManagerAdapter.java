@@ -18,7 +18,6 @@ public class BaseImageUploadManagerAdapter implements BaseImageUploadService {
     public DataResult<Map> uploadImageFile(MultipartFile imageFile) {
 
         try {
-
             Map<String, String> resultMap =(Map<String, String>) cloudinary.uploader().upload(imageFile.getBytes(), ObjectUtils.emptyMap());
 
             return new SuccessDataResult<>(resultMap);

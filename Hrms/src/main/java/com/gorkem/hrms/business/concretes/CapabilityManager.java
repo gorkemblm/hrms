@@ -9,17 +9,15 @@ import com.gorkem.hrms.dataAccess.abstracts.CapabilityDao;
 import com.gorkem.hrms.entities.concretes.Capability;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CapabilityForCurriculumVitaeDto;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CapabilityManager implements CapabilityService {
 
-    private CapabilityDao capabilityDao;
-    private CurriculumVitaeService curriculumVitaeService;
-    private ModelMapper modelMapper;
+    private final CapabilityDao capabilityDao;
+    private final CurriculumVitaeService curriculumVitaeService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public CapabilityManager(CapabilityDao capabilityDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.capabilityDao = capabilityDao;
         this.curriculumVitaeService = curriculumVitaeService;

@@ -15,11 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SocialMediaAccountManager implements SocialMediaAccountService {
 
-    private SocialMediaAccountDao socialMediaAccountDao;
-    private CurriculumVitaeService curriculumVitaeService;
-    private ModelMapper modelMapper;
+    private final SocialMediaAccountDao socialMediaAccountDao;
+    private final CurriculumVitaeService curriculumVitaeService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public SocialMediaAccountManager(SocialMediaAccountDao socialMediaAccountDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.socialMediaAccountDao = socialMediaAccountDao;
         this.curriculumVitaeService = curriculumVitaeService;

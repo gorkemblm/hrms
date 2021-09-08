@@ -19,11 +19,10 @@ import java.util.List;
 @Service
 public class CurriculumVitaeManager implements CurriculumVitaeService {
 
-    private CurriculumVitaeDao curriculumVitaeDao;
-    private JobSeekerService jobSeekerService;
-    private ModelMapper modelMapper;
+    private final CurriculumVitaeDao curriculumVitaeDao;
+    private final JobSeekerService jobSeekerService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public CurriculumVitaeManager(CurriculumVitaeDao curriculumVitaeDao, JobSeekerService jobSeekerService, ModelMapper modelMapper) {
         this.curriculumVitaeDao = curriculumVitaeDao;
         this.jobSeekerService = jobSeekerService;

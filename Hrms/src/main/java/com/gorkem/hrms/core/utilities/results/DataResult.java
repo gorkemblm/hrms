@@ -3,7 +3,7 @@ package com.gorkem.hrms.core.utilities.results;
 
 public class DataResult<T> extends Result {
 
-    private T data;
+    private final T data;
 
     public DataResult(boolean success, T data) {
         super(success);
