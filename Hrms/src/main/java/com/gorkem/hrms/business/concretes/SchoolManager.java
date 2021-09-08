@@ -19,11 +19,10 @@ import java.util.List;
 @Service
 public class SchoolManager implements SchoolService {
 
-    private SchoolDao schoolDao;
-    private CurriculumVitaeService curriculumVitaeService;
-    private ModelMapper modelMapper;
+    private final SchoolDao schoolDao;
+    private final CurriculumVitaeService curriculumVitaeService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public SchoolManager(SchoolDao schoolDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.schoolDao = schoolDao;
         this.curriculumVitaeService = curriculumVitaeService;

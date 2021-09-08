@@ -22,13 +22,12 @@ import java.util.List;
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
 
-    private JobAdvertisementDao jobAdvertisementDao;
-    private EmployerService employerService;
-    private OccupationService occupationService;
-    private CityService cityService;
-    private ModelMapper modelMapper;
+    private final JobAdvertisementDao jobAdvertisementDao;
+    private final EmployerService employerService;
+    private final OccupationService occupationService;
+    private final CityService cityService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao
             ,EmployerService employerService
             ,OccupationService occupationService

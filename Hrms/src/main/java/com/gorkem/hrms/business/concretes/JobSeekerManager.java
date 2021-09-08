@@ -16,11 +16,10 @@ import java.util.List;
 @Service
 public class JobSeekerManager implements JobSeekerService {
 
-    private JobSeekerDao jobSeekerDao;
-    private UserCheckService userCheckService;
-    private EmailService emailService;
+    private final JobSeekerDao jobSeekerDao;
+    private final UserCheckService userCheckService;
+    private final EmailService emailService;
 
-    @Autowired
     public JobSeekerManager(JobSeekerDao jobSeekerDao
             ,@Qualifier("defaultCheckService")UserCheckService userCheckService
             ,@Qualifier("defaultEmailService")EmailService emailService) {

@@ -13,9 +13,8 @@ import java.util.List;
 @Service
 public class OccupationManager implements OccupationService {
 
-    private OccupationDao occupationDao;
+    private final OccupationDao occupationDao;
 
-    @Autowired
     public OccupationManager(OccupationDao occupationDao) {
         this.occupationDao = occupationDao;
     }

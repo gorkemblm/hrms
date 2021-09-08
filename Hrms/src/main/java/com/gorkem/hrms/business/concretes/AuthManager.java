@@ -11,18 +11,16 @@ import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.JobSeekerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.UserForLoginDto;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthManager implements AuthService {
 
-    private JobSeekerService jobSeekerService;
-    private EmployerService employerService;
-    private UserService userService;
-    private ModelMapper modelMapper;
+    private final JobSeekerService jobSeekerService;
+    private final EmployerService employerService;
+    private final UserService userService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public AuthManager(JobSeekerService jobSeekerService, EmployerService employerService, UserService userService, ModelMapper modelMapper) {
         this.jobSeekerService = jobSeekerService;
         this.employerService = employerService;

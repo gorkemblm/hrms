@@ -15,11 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class LanguageManager implements LanguageService {
 
-    private LanguageDao languageDao;
-    private CurriculumVitaeService curriculumVitaeService;
-    private ModelMapper modelMapper;
+    private final LanguageDao languageDao;
+    private final CurriculumVitaeService curriculumVitaeService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public LanguageManager(LanguageDao languageDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.languageDao = languageDao;
         this.curriculumVitaeService = curriculumVitaeService;

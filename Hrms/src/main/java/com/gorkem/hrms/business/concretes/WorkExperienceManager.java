@@ -19,11 +19,10 @@ import java.util.List;
 @Service
 public class WorkExperienceManager implements WorkExperienceService {
 
-    private WorkExperinceDao workExperinceDao;
-    private CurriculumVitaeService curriculumVitaeService;
-    private ModelMapper modelMapper;
+    private final WorkExperinceDao workExperinceDao;
+    private final CurriculumVitaeService curriculumVitaeService;
+    private final ModelMapper modelMapper;
 
-    @Autowired
     public WorkExperienceManager(WorkExperinceDao workExperinceDao, CurriculumVitaeService curriculumVitaeService, ModelMapper modelMapper) {
         this.workExperinceDao = workExperinceDao;
         this.curriculumVitaeService = curriculumVitaeService;

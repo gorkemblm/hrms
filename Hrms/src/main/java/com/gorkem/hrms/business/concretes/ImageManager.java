@@ -18,11 +18,10 @@ import java.util.Map;
 @Service
 public class ImageManager implements ImageService {
 
-    private ImageDao imageDao;
-    private BaseImageUploadService baseImageUploadService;
-    private UserService userService;
+    private final ImageDao imageDao;
+    private final BaseImageUploadService baseImageUploadService;
+    private final UserService userService;
 
-    @Autowired
     public ImageManager(ImageDao imageDao, BaseImageUploadService baseImageUploadService, UserService userService) {
         this.imageDao = imageDao;
         this.baseImageUploadService = baseImageUploadService;

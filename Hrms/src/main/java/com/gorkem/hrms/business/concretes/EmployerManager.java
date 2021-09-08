@@ -16,13 +16,10 @@ import java.util.regex.Pattern;
 @Service
 public class EmployerManager implements EmployerService {
 
-    private EmployerDao employerDao;
-    private EmailService emailService;
+    private final EmployerDao employerDao;
+    private final EmailService emailService;
 
-    @Autowired
-    public EmployerManager(EmployerDao employerDao
-            ,@Qualifier("defaultEmailService") EmailService emailService) {
-
+    public EmployerManager(EmployerDao employerDao, @Qualifier("defaultEmailService") EmailService emailService) {
         this.employerDao = employerDao;
         this.emailService = emailService;
     }
