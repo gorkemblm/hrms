@@ -38,10 +38,6 @@ public class User {
     @Column(name = "is_active")
     private boolean isActive;
 
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "token_id", referencedColumnName = "id")
-    private Token token;*/
-
     @OneToOne(mappedBy = "user")
     private Image image;
 }

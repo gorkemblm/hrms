@@ -37,7 +37,4 @@ public class Token {
     @JsonIgnore
     @Column(name = "is_active")
     private boolean isActive;
-
-    /*@OneToOne(mappedBy = "token")
-    private User user;*/
 }
