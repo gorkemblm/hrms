@@ -6,6 +6,7 @@ import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.CurriculumVitae;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CoverLetterForCurriculumVitaeDto;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CurriculumVitaeAddForJobSeekerDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,17 +24,17 @@ public class CurriculumVitaesController {
     }
 
     @GetMapping("/get-all-curriculum-vitaes")
-    public DataResult<List<CurriculumVitae>> getAll() {
-        return this.curriculumVitaeService.getAll();
+    public ResponseEntity<DataResult<List<CurriculumVitae>>> getAll() {
+        return ResponseEntity.ok(this.curriculumVitaeService.getAll());
     }
 
     @PostMapping("/add-cover-letter")
-    public Result addCoverLetterForJobSeeker(@Valid @RequestBody CoverLetterForCurriculumVitaeDto coverLetterForCurriculumVitaeDto) {
-        return this.curriculumVitaeService.addCoverLetterForJobSeeker(coverLetterForCurriculumVitaeDto);
+    public ResponseEntity<Result> addCoverLetterForJobSeeker(@Valid @RequestBody CoverLetterForCurriculumVitaeDto coverLetterForCurriculumVitaeDto) {
+        return ResponseEntity.ok(this.curriculumVitaeService.addCoverLetterForJobSeeker(coverLetterForCurriculumVitaeDto));
     }
 
     @PostMapping("/add-curriculum-vitae")
-    public Result curriculumVitaeAddForJobSeeker(@RequestBody CurriculumVitaeAddForJobSeekerDto curriculumVitaeAddForJobSeekerDto) {
-        return this.curriculumVitaeService.curriculumVitaeAddForJobSeeker(curriculumVitaeAddForJobSeekerDto);
+    public ResponseEntity<Result> curriculumVitaeAddForJobSeeker(@RequestBody CurriculumVitaeAddForJobSeekerDto curriculumVitaeAddForJobSeekerDto) {
+        return ResponseEntity.ok(this.curriculumVitaeService.curriculumVitaeAddForJobSeeker(curriculumVitaeAddForJobSeekerDto));
     }
 }

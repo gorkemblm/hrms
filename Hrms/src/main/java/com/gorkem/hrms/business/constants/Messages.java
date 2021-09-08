@@ -20,6 +20,10 @@ public class Messages {
 
     public static String sendToVerificationMail = "Confirmation email has been sent. Please check your inbox";
 
+    public static String registerSuccessfully = "You have successfully registered";
+
+    public static String registerFailure = "Sorry, your registration failed";
+
     //Job Seeker
     public static String notExistGovernment = "Your information is not registered in the government system.";
 

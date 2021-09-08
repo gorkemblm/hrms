@@ -3,6 +3,7 @@ package com.gorkem.hrms.api.controllers;
 import com.gorkem.hrms.business.abstracts.CityService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.City;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -17,7 +18,7 @@ public class CitiesController {
     }
 
     @PostMapping("/add-city")
-    public Result add(@RequestBody City city) {
-        return this.cityService.add(city);
+    public ResponseEntity<Result> add(@RequestBody City city) {
+        return ResponseEntity.ok(this.cityService.add(city));
     }
 }
