@@ -4,6 +4,7 @@ import com.gorkem.hrms.business.abstracts.AuthService;
 import com.gorkem.hrms.business.abstracts.EmployerService;
 import com.gorkem.hrms.business.abstracts.JobSeekerService;
 import com.gorkem.hrms.business.abstracts.UserService;
+import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.entities.concretes.Employer;
 import com.gorkem.hrms.entities.concretes.JobSeeker;
@@ -33,9 +34,9 @@ public class AuthManager implements AuthService {
         boolean result = this.userService.findByEmailAndPassword(userForLoginDto.getEmail(), userForLoginDto.getPassword());
 
         if (!result) {
-            return new ErrorResult();
+            return new ErrorResult(Messages.loginFailure);
         }else {
-            return new SuccessResult();
+            return new SuccessResult(Messages.loginSuccessfully);
         }
     }
 
@@ -45,7 +46,6 @@ public class AuthManager implements AuthService {
         JobSeeker jobSeeker = modelMapper.map(jobSeekerForRegisterDto, JobSeeker.class);
 
         jobSeeker.setNumberOfApplication(0);
-
         jobSeeker.setActive(true);
 
         return this.jobSeekerService.add(jobSeeker);

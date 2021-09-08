@@ -3,6 +3,7 @@ package com.gorkem.hrms.api.controllers;
 import com.gorkem.hrms.business.abstracts.CapabilityService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.CapabilityForCurriculumVitaeDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,9 +20,14 @@ public class CapabilitiesController {
         this.capabilityService = capabilityService;
     }
 
-    @PostMapping("/add-jobSeeker")
+    @PostMapping("/add-capability-for-job-seeker")
     public ResponseEntity<Result> addForJobSeeker(@RequestBody CapabilityForCurriculumVitaeDto capabilityForCurriculumVitaeDto) {
+        var result = this.capabilityService.addForJobSeeker(capabilityForCurriculumVitaeDto);
 
-        return ResponseEntity.ok(this.capabilityService.addForJobSeeker(capabilityForCurriculumVitaeDto));
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 }

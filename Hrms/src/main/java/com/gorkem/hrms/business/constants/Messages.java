@@ -24,6 +24,10 @@ public class Messages {
 
     public static String registerFailure = "Sorry, your registration failed";
 
+    public static String loginSuccessfully = "You have successfully logged in";
+
+    public static String loginFailure = "You have encountered an error while logging in.";
+
     //Job Seeker
     public static String notExistGovernment = "Your information is not registered in the government system.";
 
