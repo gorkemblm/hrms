@@ -40,9 +40,6 @@ public class UserManager implements UserService {
 
     @Override
     public boolean findByEmailAndPassword(String email, String password) {
-        if (this.userDao.findByEmailAndPassword(email, password) != null) {
-            return false;
-        }
-        return true;
+        return this.userDao.findByEmailAndPassword(email, password) == null;
     }
 }
