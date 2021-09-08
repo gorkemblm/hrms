@@ -5,6 +5,7 @@ import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.WorkExperience;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.WorkExperienceForCurriculumVitaeDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/work-experiences")
 public class WorkExperiencesController {
@@ -27,8 +29,10 @@ public class WorkExperiencesController {
         var result = this.workExperienceService.findByCurriculumVitae_JobSeeker_IdOrderByWorkingDescriptionAscFinishedDateDesc(id);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -38,8 +42,10 @@ public class WorkExperiencesController {
         var result = this.workExperienceService.addWorkExperienceForJobSeeker(workExperienceForCurriculumVitaeDto);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }

@@ -5,12 +5,14 @@ import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.JobSeekerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.UserForLoginDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/auths")
 @CrossOrigin
@@ -27,8 +29,10 @@ public class AuthsController {
         var result = this.authService.registerForJobSeeker(jobSeekerForRegisterDto);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -38,8 +42,10 @@ public class AuthsController {
         var result = this.authService.registerForEmployer(employerForRegisterDto);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -49,8 +55,10 @@ public class AuthsController {
         var result = this.authService.loginForUser(userForLoginDto);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }

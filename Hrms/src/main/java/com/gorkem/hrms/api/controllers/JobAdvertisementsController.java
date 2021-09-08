@@ -5,6 +5,7 @@ import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/v1/job-advertisements")
@@ -29,8 +31,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.getAll();
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -40,8 +44,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.findByIsActiveTrue();
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -51,8 +57,10 @@ public class JobAdvertisementsController {
         var result =this.jobAdvertisementService.findByEmployerId(id);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -62,8 +70,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.findByEmployer_CompanyName(companyName);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -73,8 +83,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -84,8 +96,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
@@ -95,8 +109,10 @@ public class JobAdvertisementsController {
         var result = this.jobAdvertisementService.updateStatusJobAdvertisement(id, status);
 
         if (result.isSuccess()) {
+            log.info("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.OK.value(), result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
+            log.error("MESSAGE : {}. STATUS : {}. HTTP CODE : {}. DATA :{}", result.getMessage(), result.isSuccess(), HttpStatus.BAD_REQUEST.value(), result);
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }

@@ -28,6 +28,8 @@ public class Messages {
 
     public static String loginFailure = "You have encountered an error while logging in.";
 
+    public static String successfullyFind = "Successfully brought";
+
     //Job Seeker
     public static String notExistGovernment = "Your information is not registered in the government system.";
 
