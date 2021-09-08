@@ -4,6 +4,7 @@ import com.gorkem.hrms.business.abstracts.LanguageService;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.Language;
 import com.gorkem.hrms.entities.dtos.curriculumVitaeDtos.LanguageForCurriculumVitaeDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +25,23 @@ public class LanguagesController {
 
     @PostMapping("/add-language")
     public ResponseEntity<Result> add(@RequestBody Language language) {
-        return ResponseEntity.ok(this.languageService.add(language));
+        var result = this.languageService.add(language);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/add-language-for-jobSeeker")
     public ResponseEntity<Result> addLanguageForJobSeeker(@Valid @RequestBody LanguageForCurriculumVitaeDto languageForCurriculumVitaeDto) {
-        return ResponseEntity.ok(this.languageService.addLanguageForJobSeeker(languageForCurriculumVitaeDto));
+        var result = this.languageService.addLanguageForJobSeeker(languageForCurriculumVitaeDto);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 }

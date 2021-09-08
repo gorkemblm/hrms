@@ -5,6 +5,7 @@ import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,36 +26,78 @@ public class JobAdvertisementsController {
 
     @GetMapping("/get-all-job-advertisements")
     public ResponseEntity<DataResult<List<JobAdvertisement>>> getAll() {
-        return ResponseEntity.ok(this.jobAdvertisementService.getAll());
+        var result = this.jobAdvertisementService.getAll();
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/find-by-is-active-true-job-advertisement")
     public ResponseEntity<DataResult<List<JobAdvertisement>>> findByIsActiveTrue() {
-        return ResponseEntity.ok(this.jobAdvertisementService.findByIsActiveTrue());
+        var result = this.jobAdvertisementService.findByIsActiveTrue();
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/find-by-employer-id")
+    @GetMapping("/find-by-employer-id-job-advertisement")
     public ResponseEntity<DataResult<List<JobAdvertisement>>> findByEmployerId(@Positive int id) {
-        return ResponseEntity.ok(this.jobAdvertisementService.findByEmployerId(id));
+        var result =this.jobAdvertisementService.findByEmployerId(id);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/find-by-employer-with-companyName")
+    @GetMapping("/find-by-employer-with-companyName-job-advertisement")
     public ResponseEntity<DataResult<List<JobAdvertisement>>> findByEmployer_CompanyName(@RequestParam String companyName) {
-        return ResponseEntity.ok(this.jobAdvertisementService.findByEmployer_CompanyName(companyName));
+        var result = this.jobAdvertisementService.findByEmployer_CompanyName(companyName);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/add-job-advertisement-for-employer")
     public ResponseEntity<Result> add(@RequestBody JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
-        return ResponseEntity.ok(this.jobAdvertisementService.add(jobAdvertisementForEmployerDto));
+        var result = this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/find-by-updated-and-is-active-true")
+    @GetMapping("/find-by-updated-and-is-active-true-job-advertisement")
     public ResponseEntity<DataResult<List<JobAdvertisement>>> findByUpdatedAtAndIsActiveTrue(@RequestBody LocalDate localDate) {
-        return ResponseEntity.ok(this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate));
+        var result = this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/update-status-for-job-advertisement")
     public ResponseEntity<DataResult<JobAdvertisement>> updateStatusJobAdvertisement(@Positive @RequestParam int id, @RequestParam boolean status) {
-        return ResponseEntity.ok(this.jobAdvertisementService.updateStatusJobAdvertisement(id, status));
+        var result = this.jobAdvertisementService.updateStatusJobAdvertisement(id, status);
+
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
     }
 }
