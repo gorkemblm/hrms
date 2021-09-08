@@ -5,38 +5,34 @@ import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.dtos.authDtos.EmployerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.JobSeekerForRegisterDto;
 import com.gorkem.hrms.entities.dtos.authDtos.UserForLoginDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/auths")
+@RequestMapping("/v1/auths")
+@CrossOrigin
 public class AuthsController {
 
-    private AuthService authService;
+    private final AuthService authService;
 
-    @Autowired
     public AuthsController(AuthService authService) {
         this.authService = authService;
     }
 
-    @PostMapping("/registerForJobSeeker")
+    @PostMapping("/register-jobSeeker")
     Result registerForJobSeeker(@Valid @RequestBody JobSeekerForRegisterDto jobSeekerForRegisterDto) {
 
         return this.authService.registerForJobSeeker(jobSeekerForRegisterDto);
     }
 
-    @PostMapping("/registerForEmployer")
+    @PostMapping("/register-employer")
     public Result registerForEmployer(@Valid @RequestBody EmployerForRegisterDto employerForRegisterDto) {
 
         return this.authService.registerForEmployer(employerForRegisterDto);
     }
 
-    @PostMapping("/loginForUser")
+    @PostMapping("/login-user")
     Result loginForUser(@Valid @RequestBody UserForLoginDto userForLoginDto) {
 
         return this.authService.loginForUser(userForLoginDto);

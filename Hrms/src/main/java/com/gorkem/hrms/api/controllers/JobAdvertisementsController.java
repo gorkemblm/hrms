@@ -5,7 +5,6 @@ import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -14,47 +13,46 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/jobAdvertisements")
+@RequestMapping("/v1/job-advertisements")
 public class JobAdvertisementsController {
 
-    private JobAdvertisementService jobAdvertisementService;
+    private final JobAdvertisementService jobAdvertisementService;
 
-    @Autowired
     public JobAdvertisementsController(JobAdvertisementService jobAdvertisementService) {
         this.jobAdvertisementService = jobAdvertisementService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/get-all-job-advertisements")
     public DataResult<List<JobAdvertisement>> getAll() {
         return this.jobAdvertisementService.getAll();
     }
 
-    @GetMapping("/findByIsActiveTrue")
+    @GetMapping("/find-by-is-active-true-job-advertisement")
     public DataResult<List<JobAdvertisement>> findByIsActiveTrue() {
         return this.jobAdvertisementService.findByIsActiveTrue();
     }
 
-    @GetMapping("/findByEmployerId")
+    @GetMapping("/find-by-employer-id")
     public DataResult<List<JobAdvertisement>> findByEmployerId(@Positive int id) {
         return this.jobAdvertisementService.findByEmployerId(id);
     }
 
-    @GetMapping("/findByEmployer_CompanyName")
+    @GetMapping("/find-by-employer-with-companyName")
     public DataResult<List<JobAdvertisement>> findByEmployer_CompanyName(@RequestParam String companyName) {
         return this.jobAdvertisementService.findByEmployer_CompanyName(companyName);
     }
 
-    @PostMapping("/addJobAdvertisementForEmployer")
+    @PostMapping("/add-job-advertisement-for-employer")
     public Result add(@RequestBody JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
         return this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
     }
 
-    @GetMapping("/findByUpdatedAtAndIsActiveTrue")
+    @GetMapping("/find-by-updated-and-is-active-true")
     public DataResult<List<JobAdvertisement>> findByUpdatedAtAndIsActiveTrue(@RequestBody LocalDate localDate) {
         return this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate);
     }
 
-    @PutMapping("/updateStatusJobAdvertisement")
+    @PutMapping("/update-status-for-job-advertisement")
     public DataResult<JobAdvertisement> updateStatusJobAdvertisement(@Positive @RequestParam int id, @RequestParam boolean status) {
         return this.jobAdvertisementService.updateStatusJobAdvertisement(id, status);
     }
