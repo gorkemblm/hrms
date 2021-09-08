@@ -4,6 +4,7 @@ import com.gorkem.hrms.business.abstracts.OccupationService;
 import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.Occupation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,17 +21,17 @@ public class OccupationsController {
     }
 
     @GetMapping("/get-all-occupations")
-    public DataResult<List<Occupation>> getAll() {
-        return this.occupationService.getAll();
+    public ResponseEntity<DataResult<List<Occupation>>> getAll() {
+        return ResponseEntity.ok(this.occupationService.getAll());
     }
 
     @PostMapping("/add-occupation")
-    public Result add(@RequestBody Occupation occupation) {
-        return this.occupationService.add(occupation);
+    public ResponseEntity<Result> add(@RequestBody Occupation occupation) {
+        return ResponseEntity.ok(this.occupationService.add(occupation));
     }
 
     @GetMapping("/find-by-occupation-id")
-    public DataResult<Occupation> findOccupationById(@RequestParam int id) {
-        return this.occupationService.findOccupationById(id);
+    public ResponseEntity<DataResult<Occupation>> findOccupationById(@RequestParam int id) {
+        return ResponseEntity.ok(this.occupationService.findOccupationById(id));
     }
 }

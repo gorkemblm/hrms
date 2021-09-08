@@ -5,6 +5,7 @@ import com.gorkem.hrms.core.utilities.results.DataResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -23,37 +24,37 @@ public class JobAdvertisementsController {
     }
 
     @GetMapping("/get-all-job-advertisements")
-    public DataResult<List<JobAdvertisement>> getAll() {
-        return this.jobAdvertisementService.getAll();
+    public ResponseEntity<DataResult<List<JobAdvertisement>>> getAll() {
+        return ResponseEntity.ok(this.jobAdvertisementService.getAll());
     }
 
     @GetMapping("/find-by-is-active-true-job-advertisement")
-    public DataResult<List<JobAdvertisement>> findByIsActiveTrue() {
-        return this.jobAdvertisementService.findByIsActiveTrue();
+    public ResponseEntity<DataResult<List<JobAdvertisement>>> findByIsActiveTrue() {
+        return ResponseEntity.ok(this.jobAdvertisementService.findByIsActiveTrue());
     }
 
     @GetMapping("/find-by-employer-id")
-    public DataResult<List<JobAdvertisement>> findByEmployerId(@Positive int id) {
-        return this.jobAdvertisementService.findByEmployerId(id);
+    public ResponseEntity<DataResult<List<JobAdvertisement>>> findByEmployerId(@Positive int id) {
+        return ResponseEntity.ok(this.jobAdvertisementService.findByEmployerId(id));
     }
 
     @GetMapping("/find-by-employer-with-companyName")
-    public DataResult<List<JobAdvertisement>> findByEmployer_CompanyName(@RequestParam String companyName) {
-        return this.jobAdvertisementService.findByEmployer_CompanyName(companyName);
+    public ResponseEntity<DataResult<List<JobAdvertisement>>> findByEmployer_CompanyName(@RequestParam String companyName) {
+        return ResponseEntity.ok(this.jobAdvertisementService.findByEmployer_CompanyName(companyName));
     }
 
     @PostMapping("/add-job-advertisement-for-employer")
-    public Result add(@RequestBody JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
-        return this.jobAdvertisementService.add(jobAdvertisementForEmployerDto);
+    public ResponseEntity<Result> add(@RequestBody JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
+        return ResponseEntity.ok(this.jobAdvertisementService.add(jobAdvertisementForEmployerDto));
     }
 
     @GetMapping("/find-by-updated-and-is-active-true")
-    public DataResult<List<JobAdvertisement>> findByUpdatedAtAndIsActiveTrue(@RequestBody LocalDate localDate) {
-        return this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate);
+    public ResponseEntity<DataResult<List<JobAdvertisement>>> findByUpdatedAtAndIsActiveTrue(@RequestBody LocalDate localDate) {
+        return ResponseEntity.ok(this.jobAdvertisementService.findByUpdatedAtAndIsActiveTrue(localDate));
     }
 
     @PutMapping("/update-status-for-job-advertisement")
-    public DataResult<JobAdvertisement> updateStatusJobAdvertisement(@Positive @RequestParam int id, @RequestParam boolean status) {
-        return this.jobAdvertisementService.updateStatusJobAdvertisement(id, status);
+    public ResponseEntity<DataResult<JobAdvertisement>> updateStatusJobAdvertisement(@Positive @RequestParam int id, @RequestParam boolean status) {
+        return ResponseEntity.ok(this.jobAdvertisementService.updateStatusJobAdvertisement(id, status));
     }
 }
