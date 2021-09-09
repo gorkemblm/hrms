@@ -5,20 +5,18 @@ import com.gorkem.hrms.business.abstracts.EmployerService;
 import com.gorkem.hrms.business.abstracts.JobAdvertisementService;
 import com.gorkem.hrms.business.abstracts.OccupationService;
 import com.gorkem.hrms.business.constants.Messages;
-import com.gorkem.hrms.core.utilities.results.DataResult;
-import com.gorkem.hrms.core.utilities.results.Result;
-import com.gorkem.hrms.core.utilities.results.SuccessDataResult;
-import com.gorkem.hrms.core.utilities.results.SuccessResult;
+import com.gorkem.hrms.core.utilities.results.*;
 import com.gorkem.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.gorkem.hrms.entities.concretes.JobAdvertisement;
 import com.gorkem.hrms.entities.dtos.jobAdvertisementDtos.JobAdvertisementForEmployerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
 
@@ -43,50 +41,121 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
     @Override
     public DataResult<List<JobAdvertisement>> getAll() {
-        return new SuccessDataResult<List<JobAdvertisement>>(Messages.successfullyListed, this.jobAdvertisementDao.findAll());
+        return new SuccessDataResult<>(Messages.LIST_SUCCESSFUL, this.jobAdvertisementDao.findAll());
     }
 
     @Override
     public Result add(JobAdvertisementForEmployerDto jobAdvertisementForEmployerDto) {
+        JobAdvertisement value = null;
         JobAdvertisement jobAdvertisement = modelMapper.map(jobAdvertisementForEmployerDto, JobAdvertisement.class);
 
         jobAdvertisement.setNumberOfApplication(0);
         jobAdvertisement.setApproveStatus(false);
         jobAdvertisement.setActive(false);
 
-        this.jobAdvertisementDao.save(jobAdvertisement);
+        try {
+            value = this.jobAdvertisementDao.save(jobAdvertisement);
 
-        return new SuccessResult(Messages.successfullyAdded);
+            if (value.getId() == 0 || value.getEmployer().getId() == 0) {
+                throw new Exception();
+            } else {
+                return new SuccessResult(Messages.ADD_SUCCESSFUL);
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.ADD_FAILED, e.getMessage(), value);
+            return new ErrorResult(Messages.ADD_FAILED);
+        }
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> findByIsActiveTrue() {
-        return new SuccessDataResult<List<JobAdvertisement>>(Messages.successfullyListed, this.jobAdvertisementDao.findByIsActiveTrue());
+        List<JobAdvertisement> value = null;
+
+        try {
+            value = this.jobAdvertisementDao.findByIsActiveTrue();
+
+            if (value.isEmpty()) {
+                throw new Exception();
+            } else {
+                return new SuccessDataResult<>(Messages.LIST_SUCCESSFUL, value);
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.LIST_FAILED, e.getMessage(), value);
+            return new ErrorDataResult<>(Messages.LIST_FAILED);
+        }
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> findByUpdatedAtAndIsActiveTrue(LocalDate localDate) {
-        return new SuccessDataResult<List<JobAdvertisement>>(Messages.successfullyListed, this.jobAdvertisementDao.findByUpdatedAtAndIsActiveTrue(localDate));
+        List<JobAdvertisement> value = null;
+
+        try {
+            value = this.jobAdvertisementDao.findByUpdatedAtAndIsActiveTrue(localDate);
+
+            if (value.isEmpty()) {
+                throw new Exception();
+            } else {
+                return new SuccessDataResult<>(Messages.LIST_SUCCESSFUL, value);
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.LIST_FAILED, e.getMessage(), value);
+            return new ErrorDataResult<>(Messages.LIST_FAILED);
+        }
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> findByEmployerId(int id) {
-        return new SuccessDataResult<List<JobAdvertisement>>(Messages.successfullyListed, this.jobAdvertisementDao.findByEmployerId(id));
+        List<JobAdvertisement> value = null;
+
+        try {
+             value = this.jobAdvertisementDao.findByEmployerId(id);
+
+             if (id == 0 || value.isEmpty()) {
+                 throw new Exception();
+             } else {
+                 return new SuccessDataResult<>(Messages.LIST_SUCCESSFUL, value);
+             }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.LIST_FAILED, e.getMessage(), value);
+            return new ErrorDataResult<>(Messages.LIST_FAILED);
+        }
     }
 
     @Override
     public DataResult<JobAdvertisement> updateStatusJobAdvertisement(int id, boolean status) {
-        JobAdvertisement jobAdvertisement = this.jobAdvertisementDao.findById(id);
+        JobAdvertisement value = null;
 
-        jobAdvertisement.setActive(status);
+        try {
+            value = this.jobAdvertisementDao.findById(id);
+            value.setActive(status);
 
-        this.jobAdvertisementDao.save(jobAdvertisement);
-
-        return new SuccessDataResult<>(Messages.updateJobAdvertisementSuccess, jobAdvertisement);
+            if (id == 0 || value.getId() == 0 || value.getEmployer().getId() == 0) {
+                throw new Exception();
+            } else {
+                this.jobAdvertisementDao.save(value);
+                return new SuccessDataResult<>(Messages.UPDATE_JOB_ADVERTISEMENT_SUCCESSFUL, value);
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.UPDATE_JOB_ADVERTISEMENT_FAILED, e.getMessage(), value);
+            return new ErrorDataResult<>(Messages.UPDATE_JOB_ADVERTISEMENT_FAILED);
+        }
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> findByEmployer_CompanyName(String companyName) {
-        return new SuccessDataResult<List<JobAdvertisement>>(Messages.successfullyListed, this.jobAdvertisementDao.findByEmployer_CompanyName(companyName));
+        List<JobAdvertisement> value = null;
+
+        try {
+            value = this.jobAdvertisementDao.findByEmployer_CompanyName(companyName);
+
+            if (companyName.equals("") || value.isEmpty()) {
+                throw new Exception();
+            } else {
+                return new SuccessDataResult<>(Messages.ADD_SUCCESSFUL, value);
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.ADD_FAILED, e.getMessage(), value);
+            return new ErrorDataResult<>(Messages.ADD_FAILED);
+        }
     }
 }
