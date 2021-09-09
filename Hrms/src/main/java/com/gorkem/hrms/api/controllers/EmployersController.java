@@ -36,7 +36,7 @@ public class EmployersController {
         }
     }
 
-    @PostMapping("/add-employer")//Useless
+    @PostMapping("/add-employer")
     public ResponseEntity<Result> add(@RequestBody Employer employer) {
         var result = this.employerService.add(employer);
 

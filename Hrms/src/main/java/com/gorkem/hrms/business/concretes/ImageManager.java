@@ -4,17 +4,19 @@ import com.gorkem.hrms.business.abstracts.ImageService;
 import com.gorkem.hrms.business.abstracts.UserService;
 import com.gorkem.hrms.business.constants.Messages;
 import com.gorkem.hrms.core.adapters.BaseImageUploadService;
+import com.gorkem.hrms.core.utilities.results.ErrorResult;
 import com.gorkem.hrms.core.utilities.results.Result;
 import com.gorkem.hrms.core.utilities.results.SuccessResult;
 import com.gorkem.hrms.dataAccess.abstracts.ImageDao;
 import com.gorkem.hrms.entities.concretes.Image;
 import com.gorkem.hrms.entities.dtos.ImageWithUserDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
+@Slf4j
 @Service
 public class ImageManager implements ImageService {
 
@@ -30,6 +32,7 @@ public class ImageManager implements ImageService {
 
     @Override
     public Result add(ImageWithUserDto imageWithUserDto, MultipartFile file) {
+        Image value = null;
 
         Image image = new Image();
 
@@ -39,8 +42,16 @@ public class ImageManager implements ImageService {
 
         image.setUrl(uploadImage.get("url"));
 
-        this.imageDao.save(image);
+        try {
+            value = this.imageDao.save(image);
 
-        return new SuccessResult(Messages.successfullyAdded);
+            if (value.getId() == 0) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            log.error("CUSTOM MESSAGE : {}. EXCEPTION MESSAGE : {}. DATA : {}.", Messages.ADD_FAILED, e.getMessage(), value);
+            return new ErrorResult(Messages.ADD_FAILED);
+        }
+        return new SuccessResult(Messages.ADD_SUCCESSFUL);
     }
 }
