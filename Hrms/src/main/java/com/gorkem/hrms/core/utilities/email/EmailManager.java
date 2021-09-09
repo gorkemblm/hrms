@@ -15,6 +15,6 @@ public class EmailManager implements EmailService {
 
     @Override
     public String sendToVerificationMail(String email) {
-        return Messages.sendToVerificationMail;
+        return Messages.SEND_TO_VERIFICATION_MAIL;
     }
 }
